@@ -45,7 +45,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 9  # meses a evaluar y asignar
+meses = 3  # meses a evaluar y asignar
 
 
 class UnDia:
@@ -56,43 +56,9 @@ class UnDia:
         self.N_Night = "Sin asignar"
 
         F = []
-        F.append(datetime.date(2021, 4, 2))
-        F.append(datetime.date(2021, 4, 3))
-        F.append(datetime.date(2021, 4, 4))
+        F.append(datetime.date(2023, 1, 1))
+        F.append(datetime.date(2023, 1, 2))
 
-        F.append(datetime.date(2021, 5, 21))
-        F.append(datetime.date(2021, 5, 22))
-        F.append(datetime.date(2021, 5, 23))
-
-        F.append(datetime.date(2021, 6, 28))
-        F.append(datetime.date(2021, 6, 27))
-        F.append(datetime.date(2021, 6, 26))
-
-        F.append(datetime.date(2021, 7, 16))
-        F.append(datetime.date(2021, 7, 17))
-        F.append(datetime.date(2021, 7, 18))
-
-        F.append(datetime.date(2021, 9, 17))
-        F.append(datetime.date(2021, 9, 18))
-        F.append(datetime.date(2021, 9, 19))
-
-        F.append(datetime.date(2021, 10, 9))
-        F.append(datetime.date(2021, 10, 10))
-        F.append(datetime.date(2021, 10, 11))
-
-        F.append(datetime.date(2021, 10, 30))
-        F.append(datetime.date(2021, 10, 31))
-
-        F.append(datetime.date(2021, 11, 1))
-
-        F.append(datetime.date(2021, 12, 8))
-        F.append(datetime.date(2021, 12, 24))
-        F.append(datetime.date(2021, 12, 25))
-        F.append(datetime.date(2021, 12, 26))
-        F.append(datetime.date(2021, 12, 31))
-
-        F.append(datetime.date(2022, 1, 1))
-        F.append(datetime.date(2022, 1, 2))
 
         self.Feriado = 0
         for f in F:
@@ -135,8 +101,8 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generacion
 # de turnoS
-fecha_inicio = datetime.date(2021, 3, 29)
-fecha_final = datetime.date(2022, 1, 2)
+fecha_inicio = datetime.date(2023, 1, 1)
+fecha_final = datetime.date(2023, 4, 1)
 rfecha = fecha_inicio
 Dia = []
 Conteo_Dias_Semana = 0
@@ -198,7 +164,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2021, 4, 1)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = datetime.date(2023, 2, 14)  # Aqui se fija el dia en el que se mide antiguedad
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -219,21 +185,20 @@ class Medico:
 
 
 Medicos = []
-Medicos.append(Medico(0, 'Emmerich', 2010, 5, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(1, 'Finkelstein', 2011, 1, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(2, 'Fernandez', 2012, 2, 1, 'Master-Mañanas'))
-Medicos.append(Medico(3, 'Gomez', 2013, 7, 1, 'Master-Mañanas'))
-Medicos.append(Medico(4, 'Bravo', 2013, 7, 1, 'Master-Mañanas'))
-Medicos.append(Medico(5, 'Iñiguez', 2014, 1, 1, 'Knight-Tardes'))
-Medicos.append(Medico(6, 'Breinbauer', 2014, 1, 1, 'Knight-Tardes'))
-Medicos.append(Medico(7, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
-Medicos.append(Medico(8, 'Carrasco', 2014, 8, 1, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(9, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
-Medicos.append(Medico(10, 'Contreras', 2017, 1, 1, 'AUSENTE'))
-Medicos.append(Medico(11, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(12, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(13, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-# Medicos.append(Medico(14,'Newbie',2020,3,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Master-Mañanas'))
+Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Master-Mañanas'))
+Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Master-Mañanas'))
+Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Master-Mañanas'))
+Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
+Medicos.append(Medico(6, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
+Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
+Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
+Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
+Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
+Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
+Medicos.append(Medico(12, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
 Max_Medicos_id = 13
 check2 = 0
 check3 = 0
@@ -288,7 +253,7 @@ for dia in Dia:
             NombrePM = 'Iñiguez'
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
-            NombreAM = 'Finkelstein'
+            NombreAM = 'Iñiguez'
             NombrePM = 'Breinbauer'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
@@ -300,7 +265,7 @@ for dia in Dia:
             NombrePM = 'Culaciati'
             dia.wDay = 'Jueves'
         elif dia.fecha.isoweekday() == 5:
-            NombreAM = 'Gomez'
+            NombreAM = 'Breinbauer'
             dia.wDay = 'Viernes'
         elif dia.fecha.isoweekday() == 6:
             dia.wDay = 'Sábado'
