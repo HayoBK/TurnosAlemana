@@ -59,7 +59,6 @@ class UnDia:
         F.append(datetime.date(2023, 1, 1))
         F.append(datetime.date(2023, 1, 2))
 
-
         self.Feriado = 0
         for f in F:
             if self.fecha == f:
@@ -183,6 +182,14 @@ class Medico:
         if self.Cat != 'Yoda-Sin Noches':
             total_FindeSemanaScore += self.LoadScore
 
+        self.Vacaciones=[]
+    def Vacas(self,V1a,V1m,V1d,V2a,V2m,V2d):
+        V1=datetime.date(V1a,V1m,V1d)
+        V2=datetime.date(V2a,V2m,V2d) + timedelta(days=1)
+
+        while V1 != V2:
+            self.Vacaciones.append(V1)
+            V1=V1 + timedelta(days=1)
 
 Medicos = []
 Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
@@ -197,11 +204,16 @@ Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
 Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
 Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
 Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(12, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Max_Medicos_id = 13
+Medicos.append(Medico(12, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(13, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(14, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Max_Medicos_id = 15
 check2 = 0
 check3 = 0
+Medicos[4].Vacas(2023,2,1,2023,2,28)
+print('Vacaciones Hayo = ',Medicos[4].Vacaciones)
+
 Dias_de_Semana_Asignados = 0
 Dias_Fin_de_Semana_Asignados = 0
 # %%
@@ -249,12 +261,12 @@ for dia in Dia:
     # print(dia.fecha,' es un ',dia.tipodia)
     if dia.Feriado == 0:
         if dia.fecha.isoweekday() == 1:
-            NombreAM = 'Emmerich'
-            NombrePM = 'Iñiguez'
+            NombreAM = 'Gomez'
+            NombrePM = 'Carrasco'
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
             NombreAM = 'Iñiguez'
-            NombrePM = 'Breinbauer'
+            NombrePM = 'Contreras'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
             NombreAM = 'Fernandez'
