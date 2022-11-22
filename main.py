@@ -211,8 +211,44 @@ Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
+#Alvo
+Medicos[11].Vacas(2023,1,1,2023,1,16)
+Medicos[11].Vacas(2023,2,1,2023,2,15)
+#Arredondo
+Medicos[5].Vacas(2023,2,6,2023,3,5)
+#Boettiger
+Medicos[13].Vacas(2023,1,1,2023,1,23)
+#Breinbauer
 Medicos[4].Vacas(2023,2,1,2023,2,28)
-print('Vacaciones Hayo = ',Medicos[4].Vacaciones)
+#Carrasco
+Medicos[6].Vacas(2023,1,20,2023,2,12)
+#Contreras
+Medicos[8].Vacas(2023,2,27,2023,3,31)
+#Culaciati
+Medicos[7].Vacas(2023,2,1,2023,2,28)
+#Fernandez
+Medicos[0].Vacas(2023,1,30,2023,2,26)
+#Gomez
+Medicos[1].Vacas(2023,1,21,2023,2,19)
+#Iñiguez
+Medicos[3].Vacas(2023,1,1,2023,1,31)
+#Loch
+Medicos[14].Vacas(2023,1,30,2023,2,19)
+#Pio
+Medicos[10].Vacas(2023,2,1,2023,2,28)
+#Ramos
+Medicos[12].Vacas(2023,1,4,2023,1,18)
+#Rubio
+Medicos[15].Vacas(2023,1,30,2023,2,20)
+
+
+
+
+
+
+
+
+
 
 Dias_de_Semana_Asignados = 0
 Dias_Fin_de_Semana_Asignados = 0
