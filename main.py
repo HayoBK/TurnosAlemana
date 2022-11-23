@@ -1,11 +1,16 @@
+# ---------------------------------------------------------------------------------
+# Versión 2022_Noviembre para programación de turnos Vacaciones Ene-Marzo 2023
+# Para nuevos calculos revisar linea 48... meses a evaluar!
+# En linea 60 --> añadir lista de Feriados
+# En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
+#   en la mitad del periodo que estamos evaluando.
+# ---------------------------------------------------------------------------------
+
 # %%
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
 # %%
-# Aqui copiar desde Pythonista
 # %%
-import math
 import heapq
 import datetime
 from datetime import timedelta
@@ -40,7 +45,7 @@ print('  lunes a jueves ')
 # cada dia calendario
 Dias_de_Semana = 0
 Dias_de_Fin_de_Semana = 0
-C_AM = 0
+C_AM = 0                    # C_AM y parecidos es conteo de numeros de días/tramos a asignar
 C_PM = 0
 C_FridayPM = 0
 C_Night = 0
@@ -55,9 +60,11 @@ class UnDia:
         self.N_PM = "Sin asignar"
         self.N_Night = "Sin asignar"
 
+        # Aquí añadir lista de feriados y días especiales.
         F = []
         F.append(datetime.date(2023, 1, 1))
         F.append(datetime.date(2023, 1, 2))
+        # ------------------------------------------------
 
         self.Feriado = 0
         for f in F:
@@ -94,11 +101,10 @@ class UnDia:
 
         # asignacion Feriados, Fin de Semana Largos
 
-        # print(SuFecha,' es un ',self.tipodia)
 
 
 # %%
-# Fijar fechas de inicio y final de la generacion
+# Fijar fechas de inicio y final de la generación
 # de turnoS
 fecha_inicio = datetime.date(2023, 1, 1)
 fecha_final = datetime.date(2023, 4, 1)
@@ -107,7 +113,7 @@ Dia = []
 Conteo_Dias_Semana = 0
 Conteo_Dias_Fin_de_Semana = 0
 
-# Ciclo inicial para definir calendario basico
+# Ciclo inicial para definir calendario basico --> Aqui se crean de verdad los día.
 while rfecha <= fecha_final:
     Dia.append(UnDia(rfecha))  # Aqui se genera un dia del calendario
     rfecha = rfecha + timedelta(days=1)
@@ -116,6 +122,12 @@ while rfecha <= fecha_final:
 # Dias_de_Semana = 60
 # Dias_de_Fin_de_Semana = 26
 # %%
+# Esta parte de aqui, tuvo como intención generar una distribución más plana y equilibrada de turnos
+# Intentó poner un minimo y un máximo de turnos a cargosear al más joven y al más viejo.
+# No resultó tanto.
+# Terminé armando un M y un N arbitrarios para intentar hacer lo mismo.
+
+
 delta = 10  # año de referencia
 CZERO_AM = 0
 CZERO_PM = 0
@@ -135,7 +147,9 @@ Carga12 = C12_AM * AM + C12_PM * PM + C12_FridayPM * FridayPM + C12_Night * Nigh
 
 m = (Carga12 - CargaZERO) / delta
 n = delta - m * Carga12
-m = -0.9  # ESTE VALOR "APLANA la curva de distribución"
+m = -0.9  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
+          # ensayo y error logré definir.
+
 n = 16.75
 print('m= ', m)
 print('n= ', n)
@@ -294,6 +308,8 @@ print('Los siguientes numeros deben ser iguales =', CargaMaxima, ' y ', Check)
 for dia in Dia:
     NombreAM = 'Sin asignar'
     NombrePM = 'Sin asignar'
+    dia.N_AM = NombreAM
+    dia.N_PM = NombrePM
     # print(dia.fecha,' es un ',dia.tipodia)
     if dia.Feriado == 0:
         if dia.fecha.isoweekday() == 1:
@@ -322,19 +338,18 @@ for dia in Dia:
 
         if dia.fecha.isoweekday() < 6:
             for med in Medicos:
-                if med.nombre == NombreAM:
+                if (med.nombre == NombreAM) and (dia.fecha not in med.Vacaciones):
                     C_AM -= 1
                     med.CargaReal += AM
                     dia.N_AM = NombreAM
                     med.A_AM += 1
-                    print('La mañana la hace ', dia.N_AM)
-                if med.nombre == NombrePM:
+                if med.nombre == NombrePM and (dia.fecha not in med.Vacaciones):
                     C_PM -= 1
                     med.CargaReal += PM
                     dia.N_PM = NombrePM
                     med.A_PM += 1
 
-                    print('La tarde la hace ', dia.N_PM)
+    print('El dia ', dia.fecha.isoweekday(), dia.fecha,' lo hace ', dia.N_AM, ' mañana y ', dia.N_PM,' tarde')
 
 # %%
 print('AM:', C_AM)
