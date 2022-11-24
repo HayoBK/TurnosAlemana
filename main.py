@@ -637,16 +637,16 @@ for med in Medicos:
 # %%
 
 # %%
-plt.scatter(Antiguedad, Carga)
-plt.xlabel('Antiguedad')
-plt.ylabel('Carga')
-plt.show()
+#plt.scatter(Antiguedad, Carga)
+#plt.xlabel('Antiguedad')
+#plt.ylabel('Carga')
+#plt.show()
 
 # %%
-plt.scatter(Antiguedad, CargaT)
-plt.xlabel('Antiguedad')
-plt.ylabel('Carga Teorica')
-plt.show()
+#plt.scatter(Antiguedad, CargaT)
+#plt.xlabel('Antiguedad')
+#plt.ylabel('Carga Teorica')
+#plt.show()
 
 # %%
 # ------------------------------------------------------------------------------------
@@ -970,7 +970,7 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario Abril-Diciembre 2021.xlsx', index=None, header=True)
+    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version 11_2022).xlsx', index=None, header=True)
 # %%
 ForPandas4 = []
 for med in Medicos:
@@ -978,7 +978,7 @@ for med in Medicos:
     ForPandas4.append(medListFD)
 Columnas2 = ['Medico', 'Sabados', 'Domingos']
 MedDF4 = pd.DataFrame(ForPandas4, columns=Columnas2)
-Export2 = MedDF4.to_excel('AA - Recuento Fines de semana Abril-Diciembre 2021.xlsx', index=None, header=True)
+Export2 = MedDF4.to_excel('AA - Recuento Fines de semana.xlsx', index=None, header=True)
 # %%
 
 # %%
