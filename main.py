@@ -399,12 +399,13 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 C_AM = Check
 while Check != 0:
     for med in reversed(Medicos):
-        if Check > 0:
-            med.A_AM += 1
-            Check -= 1
-        if Check < 0:
-            med.A_AM -= 1
-            Check += 1
+        if med.Cat == 'Padawan-Sin Fijo':
+            if Check > 0:
+                med.A_AM += 1
+                Check -= 1
+            if Check < 0:
+                med.A_AM -= 1
+                Check += 1
 
 print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
 C_AM = Check
@@ -437,12 +438,13 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 C_PM = Check
 while Check != 0:
     for med in reversed(Medicos):
-        if Check > 0:
-            med.A_PM += 1
-            Check -= 1
-        if Check < 0:
-            med.A_PM -= 1
-            Check += 1
+        if med.Cat == 'Padawan-Sin Fijo':
+            if Check > 0:
+                med.A_PM += 1
+                Check -= 1
+            if Check < 0:
+                med.A_PM -= 1
+                Check += 1
 
 print('Turno de Tardes Lu-Vi sin asingar -error - : ', Check)
 C_PM = Check
@@ -473,12 +475,13 @@ print('Turno de Viernes tarde sin asingar -error - : ', Check)
 C_FridayPM = Check
 while Check != 0:
     for med in reversed(Medicos):
-        if Check > 0:
-            med.A_FridayPM += 1
-            Check -= 1
-        if Check < 0:
-            med.A_FridayPM -= 1
-            Check += 1
+        if med.Cat == 'Padawan-Sin Fijo':
+            if Check > 0:
+                med.A_FridayPM += 1
+                Check -= 1
+            if Check < 0:
+                med.A_FridayPM -= 1
+                Check += 1
 
 print('Turno de Viernes Tarde sin asingar -error - : ', Check)
 C_FridayPM = Check
@@ -720,6 +723,8 @@ for D in Dia:
 TuList = []
 for med in Medicos:
     if med.A_PM > 0:
+
+
         med.TCount = med.A_PM # --> Cantidad de Turnos a distribuir
         med.Fq = (Count_PM / med.TCount) # --> Frecuencia
         med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
@@ -964,6 +969,11 @@ for D in Dia:
             D.N_Night = C[1]
             InsD += 1
 # %%
+#  ++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# AQUI SE IMPRIMEN LOS TURNO
+
+#  ++++++++++++++++++++++++++++++++++++++++++++++++++
 ForPandasCal = []
 for D in Dia:
     print(D.fecha, ' es ', D.wDay)
@@ -973,15 +983,57 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version 11_2022).xlsx', index=None, header=True)
+    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Git_Hub 8).xlsx', index=None, header=True)
+
+    for med in Medicos:
+        med.Ch_AM = 0
+        med.Ch_PM = 0
+        med.Ch_Night = 0
+        med.Ch_FridayPM = 0
+        med.Ch_WeekEnd = 0
+        med.Ch_Carga = 0
+    for ind, row in MedDF.iterrows():
+        print(ind)
+        #dd = datetime.datetime.strptime(str(row['Fecha']), '%Y-%m-%d %H:%M:%S')
+        ddd = datetime.date(int(row['Año']), int(row['Mes']), int(row['Dia']))
+        # print(ddd)
+        for dia in Dia:
+            # print(dia.fecha)
+            if ddd == dia.fecha:
+                if dia.Feriado != 1:
+                    print('El dia ', ddd, 'No es feriado o especial')
+                    if dia.tipodia == "Lunes a Jueves":
+                        AMAM = AM
+                        PMPM = PM
+                        NightNight = Night
+                    elif dia.tipodia == "Viernes":
+                        AMAM = AM
+                        PMPM = FridayPM
+                        NightNight = Night
+                    elif dia.tipodia == "Fin de Semana":
+                        AMAM = WeekEnd / 3
+                        PMPM = WeekEnd / 3
+                        NightNight = WeekEnd / 3
+
+                    for med in Medicos:
+                        if row['Mañana'] == med.nombre:
+                            med.Ch_Carga += AMAM
+                            Ch_Carga_Total += AMAM
+
+                        if row['Tarde'] == med.nombre:
+                            med.Ch_Carga += PMPM
+                            Ch_Carga_Total += PMPM
+                        if row['Noche'] == med.nombre:
+                            med.Ch_Carga += NightNight
+                            Ch_Carga_Total += NightNight
+                            med.Ch_Night += 1
+                    print(Ch_Carga_Total)
+                else:
+                    print('El dia ', ddd, 'ES FERIADO O ESPECIAL')
+
 # %%
-ForPandas4 = []
-for med in Medicos:
-    medListFD = [med.nombre, med.Conteo_Sabados, med.Conteo_Domingos]
-    ForPandas4.append(medListFD)
-Columnas2 = ['Medico', 'Sabados', 'Domingos']
-MedDF4 = pd.DataFrame(ForPandas4, columns=Columnas2)
-Export2 = MedDF4.to_excel('AA - Recuento Fines de semana.xlsx', index=None, header=True)
+
+
 # %%
 
 # %%
@@ -1001,7 +1053,8 @@ for med in Medicos:
     med.Ch_FridayPM = 0
     med.Ch_WeekEnd = 0
     med.Ch_Carga = 0
-
+    med.Ch_Sab = 0
+    med.Ch_Dom = 0
 Ch_Carga_Total = 0
 print('why2')
 for ind, row in CheckT.iterrows():
@@ -1013,16 +1066,42 @@ for ind, row in CheckT.iterrows():
         # print(dia.fecha)
         if ddd == dia.fecha:
             if dia.Feriado != 1:
+                if dia.fecha.isoweekday() == 6:
+                    med.Ch_Sab+=1
+                if dia.fecha.isoweekday() == 7:
+                    med.Ch_Dom+=1
+
                 print('El dia ', ddd, 'No es feriado o especial')
                 if dia.tipodia == "Lunes a Jueves":
+                    for med in Medicos:
+                        if row['Mañana'] == med.nombre:
+                            med.Ch_AM += 1
+                        if row['Tarde'] == med.nombre:
+                            med.Ch_PM += 1
+                        if row['Noche'] == med.nombre:
+                            med.Ch_Night += 1
                     AMAM = AM
                     PMPM = PM
                     NightNight = Night
                 elif dia.tipodia == "Viernes":
+                    for med in Medicos:
+                        if row['Mañana'] == med.nombre:
+                            med.Ch_AM += 1
+                        if row['Tarde'] == med.nombre:
+                            med.Ch_FridayPM += 1
+                        if row['Noche'] == med.nombre:
+                            med.Ch_Night += 1
                     AMAM = AM
                     PMPM = FridayPM
                     NightNight = Night
                 elif dia.tipodia == "Fin de Semana":
+                    for med in Medicos:
+                        if row['Mañana'] == med.nombre:
+                            med.Ch_WeekEnd += (1/3)
+                        if row['Tarde'] == med.nombre:
+                            med.Ch_WeekEnd += (1/3)
+                        if row['Noche'] == med.nombre:
+                            med.Ch_WeekEnd += (1/3)
                     AMAM = WeekEnd / 3
                     PMPM = WeekEnd / 3
                     NightNight = WeekEnd / 3
@@ -1068,9 +1147,12 @@ MedDF9 = pd.DataFrame(CheckTab, columns=Columnas6)
 # %%
 ForPandas8 = []
 for med in Medicos:
-    medListAlpha = [med.nombre, med.Ch_CargaT, med.Ch_CargaA]
+    medListAlpha = [med.nombre, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/meses,
+                    med.Ch_PM/meses,
+                    med.Ch_FridayPM/meses,med.Ch_Night/meses,med.Ch_WeekEnd/meses]
     ForPandas8.append(medListAlpha)
-Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada']
+Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
+             'ViernesTarde/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
 # %%
