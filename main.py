@@ -189,8 +189,8 @@ class Medico:
         self.CargaReal = 0
 
         self.AntiqNz = (self.Antiq / 12) - 0.5
-        self.LoadScore = 1 - self.AntiqNz + 0.5
-        global total_LoadScore
+        self.LoadScore = 1 - self.AntiqNz + 0.5   # Carga del Médico
+        global total_LoadScore          # Total de Carga de todos los médicos sumados
         total_LoadScore += self.LoadScore
         global total_FindeSemanaScore
         if self.Cat != 'Yoda-Sin Noches':
@@ -339,10 +339,10 @@ for dia in Dia:
         if dia.fecha.isoweekday() < 6:
             for med in Medicos:
                 if (med.nombre == NombreAM) and (dia.fecha not in med.Vacaciones):
-                    C_AM -= 1
-                    med.CargaReal += AM
+                    C_AM -= 1   # Quito uno de los bloques a asignar
+                    med.CargaReal += AM   # añado carga real asignada
                     dia.N_AM = NombreAM
-                    med.A_AM += 1
+                    med.A_AM += 1  # Aumento en uno el numero de mañanas asignados.
                 if med.nombre == NombrePM and (dia.fecha not in med.Vacaciones):
                     C_PM -= 1
                     med.CargaReal += PM
@@ -352,7 +352,7 @@ for dia in Dia:
     print('El dia ', dia.fecha.isoweekday(), dia.fecha,' lo hace ', dia.N_AM, ' mañana y ', dia.N_PM,' tarde')
 
 # %%
-print('AM:', C_AM)
+print('AM:', C_AM)  # aqui vendrían los que faltan por asignar aún.
 print('PM:', C_PM)
 print('FridayPM:', C_FridayPM)
 print('Night:', C_Night)
@@ -370,7 +370,83 @@ print()
 for med in Medicos:
     med.Factor = med.CargaRestante / CargaRestanteTotal
     print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+
 # %%
+# ---------------------------------------------------
+# Asignar Numero Mañanas pendientes por vacaciones
+# update Carga
+CargaRestanteTotal = 0
+for med in Medicos:
+    if med.Cat == 'Padawan-Sin Fijo':
+        med.CargaRestante = med.CargaMax - med.CargaReal
+        CargaRestanteTotal += med.CargaRestante
+        print('A ', med.nombre, ' queda por asignarle: ', med.CargaRestante)
+
+print()
+
+Check = C_AM
+for med in Medicos:
+    if med.Cat == 'Padawan-Sin Fijo':
+        med.Factor = med.CargaRestante / CargaRestanteTotal
+        med.A_AM = round(C_AM * med.Factor)
+        Check -= med.A_AM
+        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+        print('Lo que equivale a los siguientes turnos: ', med.A_AM)
+
+print()
+print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
+
+C_AM = Check
+while Check != 0:
+    for med in reversed(Medicos):
+        if Check > 0:
+            med.A_AM += 1
+            Check -= 1
+        if Check < 0:
+            med.A_AM -= 1
+            Check += 1
+
+print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
+C_AM = Check
+
+# ---------------------------------------------------
+
+# Asignar Numero Tardes Lu-Ju pendientes por vacaciones
+# update Carga
+CargaRestanteTotal = 0
+for med in Medicos:
+    if med.Cat == 'Padawan-Sin Fijo':
+        med.CargaRestante = med.CargaMax - med.CargaReal
+        CargaRestanteTotal += med.CargaRestante
+        print('A ', med.nombre, ' queda por asignarle: ', med.CargaRestante)
+
+print()
+
+Check = C_PM
+for med in Medicos:
+    if med.Cat == 'Padawan-Sin Fijo':
+        med.Factor = med.CargaRestante / CargaRestanteTotal
+        med.A_PM = round(C_PM * med.Factor)
+        Check -= med.A_PM
+        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+        print('Lo que equivale a los siguientes turnos: ', med.A_PM)
+
+print()
+print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
+
+C_PM = Check
+while Check != 0:
+    for med in reversed(Medicos):
+        if Check > 0:
+            med.A_PM += 1
+            Check -= 1
+        if Check < 0:
+            med.A_PM -= 1
+            Check += 1
+
+print('Turno de Tardes Lu-Vi sin asingar -error - : ', Check)
+C_PM = Check
+
 # Asignar Numero de Viernes Tarde
 # update Carga
 CargaRestanteTotal = 0
@@ -406,6 +482,7 @@ while Check != 0:
 
 print('Turno de Viernes Tarde sin asingar -error - : ', Check)
 C_FridayPM = Check
+
 # %%
 # Asignar Numero Fines de Semana
 # update Carga
@@ -572,13 +649,19 @@ plt.ylabel('Carga Teorica')
 plt.show()
 
 # %%
+# ------------------------------------------------------------------------------------
+#       ASIGNAR TURNOS A CALENDARIO
+# ------------------------------------------------------------------------------------
+Conflictos=[]
+
+# ---------------------------------------------
 # ORDENAR LISTA DE FINES DE SEMANA
 TuList = []
 for med in Medicos:
     if med.A_WeekEnd > 0:
-        med.TCount = med.A_WeekEnd
-        med.Fq = (Count_WeekEnd / med.TCount)
-        med.Pri = med.Fq / 2
+        med.TCount = med.A_WeekEnd # --> Cantidad de Turnos a distribuir
+        med.Fq = (Count_WeekEnd / med.TCount) # --> Frecuencia
+        med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
         heapq.heappush(TuList, (med.Pri, med.id, med.TCount, med.Fq))
 
 LongListWeekEnd = []
@@ -594,8 +677,8 @@ while Count_WeekEnd > AssignCount:
 i = 0
 FinalListWeekEnd = []
 for L in LongListWeekEnd:
-    heapq.heappush(FinalListWeekEnd, (i, Medicos[L].nombre))
-    i += 1
+    heapq.heappush(FinalListWeekEnd, (i, Medicos[L].nombre))  #--> Lista donde estan todos bien distribuiditos
+    i += 1 # i, determina el lugar en la lista
     # print(i,L,Medicos[L].nombre)
 # %%
 # Asignar Fines de Semana a Calendario
@@ -606,7 +689,23 @@ for D in Dia:
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_AM == 'Sin asignar':
-            C = heapq.heappop(FinalListWeekEnd)
+            Tolerancia=2*len(FinalListWeekEnd)
+            Intentos=0
+            while True:
+                C = heapq.heappop(FinalListWeekEnd)
+                Listo = True
+                for med in Medicos:
+                    if C[1] == med.nombre:
+                        if (D.fecha in med.Vacaciones):
+                            i+=1
+                            heapq.heappush(FinalListWeekEnd, (i, med.nombre)) # volvemos a meter al sujeto a la lista
+                            Listo = False
+                            Intentos +=1
+                if Intentos > Tolerancia:
+                    Listo = True
+                    Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                if Listo == True:
+                    break
             # print(C)
             D.N_AM = C[1]
             D.N_PM = C[1]
@@ -807,3 +906,7 @@ Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
 # %%
+print('Conflictos:')
+for con in Conflictos:
+    print(con)
+print('Listo')
