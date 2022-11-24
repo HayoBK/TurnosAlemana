@@ -812,7 +812,10 @@ for D in Dia:
             Tolerancia=2*len(FinalListWeekEnd)
             Intentos=0
             while True:
-                C = heapq.heappop(FinalListWeekEnd)
+                if len(FinalListWeekEnd)>0:
+                    C = heapq.heappop(FinalListWeekEnd)
+                else:
+                    C = heapq.heappop(Cachisimos)
                 Listo = True
                 for med in Medicos:
                     if C[1] == med.nombre:
@@ -1060,8 +1063,8 @@ print(Ch_T, Ch_A)
 
 Columnas6 = ['Medico', 'Carga', 'Tipo de Carga']
 MedDF9 = pd.DataFrame(CheckTab, columns=Columnas6)
-sns.color_palette("coolwarm")
-G1 = sns.barplot(x='Carga', y='Medico', data=MedDF9, hue='Tipo de Carga')
+#sns.color_palette("coolwarm")
+#G1 = sns.barplot(x='Carga', y='Medico', data=MedDF9, hue='Tipo de Carga')
 # %%
 ForPandas8 = []
 for med in Medicos:
