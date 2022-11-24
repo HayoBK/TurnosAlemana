@@ -654,6 +654,122 @@ plt.show()
 # ------------------------------------------------------------------------------------
 Conflictos=[]
 
+Cachisimos=[] # Lista de pucha... personajes a canular en caso de conflicto que no se pueda resolver...
+j=0
+for f in range(10):
+    for med in reversed(Medicos):
+        if med.Cat == 'Padawan-Sin Fijo':
+            j+=1
+            heapq.heappush(Cachisimos, (j,med.nombre))
+
+## ORDENAR LISTA DE MAÑANAS PENDIENTES
+TuList = []
+for med in Medicos:
+    if med.A_AM > 0:
+        med.TCount = med.A_AM # --> Cantidad de Turnos a distribuir
+        med.Fq = (Count_AM / med.TCount) # --> Frecuencia
+        med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
+        heapq.heappush(TuList, (med.Pri, med.id, med.TCount, med.Fq))
+
+LongListAM = []
+AssignCount = 0
+while Count_AM > AssignCount:
+    B = heapq.heappop(TuList)
+    if B[2] > 0:
+        LongListAM.append(Medicos[B[1]].id)
+        AssignCount += 1
+        if (B[2] - 1) > 0:
+            heapq.heappush(TuList, ((B[0] + B[3]), B[1], B[2] - 1, B[3]))
+i = 0
+FinalListAM = []
+for L in LongListAM:
+    heapq.heappush(FinalListAM, (i, Medicos[L].nombre))  #--> Lista donde estan todos bien distribuiditos
+    i += 1 # i, determina el lugar en la lista
+    # print(i,L,Medicos[L].nombre)
+# %%
+# Asignar Mañanas a Calendario
+InsD = 0
+for D in Dia:
+    # print(D.fecha.isoweekday())
+    if D.fecha.isoweekday() < 6:
+        # print('+++++++++++++++++++++')
+        # print(Dia.index(D))
+        if D.N_AM == 'Sin asignar':
+            Tolerancia=2*len(FinalListAM)
+            Intentos=0
+            while True:
+                C = heapq.heappop(FinalListAM)
+                Listo = True
+                for med in Medicos:
+                    if C[1] == med.nombre:
+                        if (D.fecha in med.Vacaciones):
+                            i+=1
+                            heapq.heappush(FinalListAM, (i, med.nombre)) # volvemos a meter al sujeto a la lista
+                            Listo = False
+                            Intentos +=1
+                if Intentos > Tolerancia:
+                    Listo = True
+                    Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                if Listo == True:
+                    break
+            # print(C)
+            D.N_AM = C[1]
+            InsD += 1
+
+## ORDENAR LISTA DE TARDES PENDIENTES
+TuList = []
+for med in Medicos:
+    if med.A_PM > 0:
+        med.TCount = med.A_PM # --> Cantidad de Turnos a distribuir
+        med.Fq = (Count_PM / med.TCount) # --> Frecuencia
+        med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
+        heapq.heappush(TuList, (med.Pri, med.id, med.TCount, med.Fq))
+
+LongListPM = []
+AssignCount = 0
+while Count_PM > AssignCount:
+    B = heapq.heappop(TuList)
+    if B[2] > 0:
+        LongListPM.append(Medicos[B[1]].id)
+        AssignCount += 1
+        if (B[2] - 1) > 0:
+            heapq.heappush(TuList, ((B[0] + B[3]), B[1], B[2] - 1, B[3]))
+# print ('Secuencia Domingos:')
+i = 0
+FinalListPM = []
+for L in LongListPM:
+    heapq.heappush(FinalListPM, (i, Medicos[L].nombre))  #--> Lista donde estan todos bien distribuiditos
+    i += 1 # i, determina el lugar en la lista
+    # print(i,L,Medicos[L].nombre)
+# %%
+# Asignar Fines de Semana a Calendario
+InsD = 0
+for D in Dia:
+    # print(D.fecha.isoweekday())
+    if D.fecha.isoweekday() < 5:
+        # print('+++++++++++++++++++++')
+        # print(Dia.index(D))
+        if D.N_PM == 'Sin asignar':
+            Tolerancia=2*len(FinalListPM)
+            Intentos=0
+            while True:
+                C = heapq.heappop(FinalListPM)
+                Listo = True
+                for med in Medicos:
+                    if C[1] == med.nombre:
+                        if (D.fecha in med.Vacaciones):
+                            i+=1
+                            heapq.heappush(FinalListPM, (i, med.nombre)) # volvemos a meter al sujeto a la lista
+                            Listo = False
+                            Intentos +=1
+                if Intentos > Tolerancia:
+                    Listo = True
+                    Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                if Listo == True:
+                    break
+            # print(C)
+            D.N_PM = C[1]
+            InsD += 1
 # ---------------------------------------------
 # ORDENAR LISTA DE FINES DE SEMANA
 TuList = []
@@ -681,6 +797,10 @@ for L in LongListWeekEnd:
     i += 1 # i, determina el lugar en la lista
     # print(i,L,Medicos[L].nombre)
 # %%
+
+
+
+
 # Asignar Fines de Semana a Calendario
 InsD = 0
 for D in Dia:
@@ -710,6 +830,19 @@ for D in Dia:
             D.N_AM = C[1]
             D.N_PM = C[1]
             D.N_Night = C[1]
+            for med in Medicos:  # Sacar las noches de los Yoda-Sin noches... manso jaleo...
+                if D.N_Night == med.nombre:
+                    if med.Cat == 'Yoda-Sin Noches':
+                        while True:
+                            h=False
+                            Cacho = heapq.heappop(Cachisimos)
+                            for med2 in Medicos:
+                                if med2.nombre == Cacho[1]:
+                                    if D.fecha in med2.Vacaciones:
+                                        h=True
+                            if h==False:
+                                D.N_Night = Cacho[1]
+                                break
             for med in Medicos:
                 if D.N_AM == med.nombre:
                     if D.fecha.isoweekday() == 6:
@@ -752,8 +885,24 @@ for D in Dia:
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_PM == 'Sin asignar':
-            C = heapq.heappop(FinalListFridayPM)
-            # print(C)
+
+            Tolerancia = 2 * len(FinalListFridayPM)
+            Intentos = 0
+            while True:
+                C = heapq.heappop(FinalListFridayPM)
+                Listo = True
+                for med in Medicos:
+                    if C[1] == med.nombre:
+                        if (D.fecha in med.Vacaciones):
+                            i += 1
+                            heapq.heappush(FinalListFridayPM, (i, med.nombre))  # volvemos a meter al sujeto a la lista
+                            Listo = False
+                            Intentos += 1
+                if Intentos > Tolerancia:
+                    Listo = True
+                    Conflictos.append([D.fecha, C[1], 'Conflicto de Vacaciones a revisar'])
+                if Listo == True:
+                    break
             D.N_PM = C[1]
             InsD += 1
 # %%
@@ -791,7 +940,23 @@ for D in Dia:
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_Night == 'Sin asignar':
-            C = heapq.heappop(FinalListNight)
+            Tolerancia = 2 * len(FinalListNight)
+            Intentos = 0
+            while True:
+                C = heapq.heappop(FinalListNight)
+                Listo = True
+                for med in Medicos:
+                    if C[1] == med.nombre:
+                        if (D.fecha in med.Vacaciones):
+                            i += 1
+                            heapq.heappush(FinalListNight, (i, med.nombre))  # volvemos a meter al sujeto a la lista
+                            Listo = False
+                            Intentos += 1
+                if Intentos > Tolerancia:
+                    Listo = True
+                    Conflictos.append([D.fecha, C[1], 'Conflicto de Vacaciones a revisar'])
+                if Listo == True:
+                    break
             # print(C)
             D.N_Night = C[1]
             InsD += 1
