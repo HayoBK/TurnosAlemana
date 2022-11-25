@@ -59,7 +59,7 @@ class UnDia:
         self.N_AM = "Sin asignar"
         self.N_PM = "Sin asignar"
         self.N_Night = "Sin asignar"
-
+        self.conflict = " - "
         # Aquí añadir lista de feriados y días especiales.
         F = []
         F.append(datetime.date(2023, 1, 1))
@@ -108,6 +108,8 @@ class UnDia:
 # de turnoS
 fecha_inicio = datetime.date(2023, 1, 1)
 fecha_final = datetime.date(2023, 4, 1)
+delta3 = fecha_final-fecha_inicio
+Periodo = delta3.days
 rfecha = fecha_inicio
 Dia = []
 Conteo_Dias_Semana = 0
@@ -169,6 +171,7 @@ class Medico:
         self.A_FridayPM = 0
         self.A_Night = 0
         self.A_WeekEnd = 0
+        self.Conteo_Vacaciones = 0
 
         self.Conteo_Sabados = 0
         self.Conteo_Domingos = 0
@@ -200,7 +203,8 @@ class Medico:
     def Vacas(self,V1a,V1m,V1d,V2a,V2m,V2d):
         V1=datetime.date(V1a,V1m,V1d)
         V2=datetime.date(V2a,V2m,V2d) + timedelta(days=1)
-
+        delta1 = V2-V1
+        self.Conteo_Vacaciones+=delta1.days
         while V1 != V2:
             self.Vacaciones.append(V1)
             V1=V1 + timedelta(days=1)
@@ -254,6 +258,10 @@ Medicos[10].Vacas(2023,2,1,2023,2,28)
 Medicos[12].Vacas(2023,1,4,2023,1,18)
 #Rubio
 Medicos[15].Vacas(2023,1,30,2023,2,20)
+#Cisternas
+Medicos[9].Vacas(2023,2,5,2023,2,19)
+#Bravo
+Medicos[2].Vacas(2023,1,20,2023,2,17)
 
 
 
@@ -342,12 +350,12 @@ for dia in Dia:
                     C_AM -= 1   # Quito uno de los bloques a asignar
                     med.CargaReal += AM   # añado carga real asignada
                     dia.N_AM = NombreAM
-                    med.A_AM += 1  # Aumento en uno el numero de mañanas asignados.
+                    #med.A_AM += 1  # Aumento en uno el numero de mañanas asignados.
                 if med.nombre == NombrePM and (dia.fecha not in med.Vacaciones):
                     C_PM -= 1
                     med.CargaReal += PM
                     dia.N_PM = NombrePM
-                    med.A_PM += 1
+                    #med.A_PM += 1
 
     print('El dia ', dia.fecha.isoweekday(), dia.fecha,' lo hace ', dia.N_AM, ' mañana y ', dia.N_PM,' tarde')
 
@@ -396,7 +404,7 @@ for med in Medicos:
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 
-C_AM = Check
+#C_AM = Check
 while Check != 0:
     for med in reversed(Medicos):
         if med.Cat == 'Padawan-Sin Fijo':
@@ -408,7 +416,7 @@ while Check != 0:
                 Check += 1
 
 print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
-C_AM = Check
+#C_AM = Check
 
 # ---------------------------------------------------
 
@@ -435,7 +443,7 @@ for med in Medicos:
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 
-C_PM = Check
+#C_PM = Check
 while Check != 0:
     for med in reversed(Medicos):
         if med.Cat == 'Padawan-Sin Fijo':
@@ -447,7 +455,7 @@ while Check != 0:
                 Check += 1
 
 print('Turno de Tardes Lu-Vi sin asingar -error - : ', Check)
-C_PM = Check
+#C_PM = Check
 
 # Asignar Numero de Viernes Tarde
 # update Carga
@@ -670,13 +678,13 @@ TuList = []
 for med in Medicos:
     if med.A_AM > 0:
         med.TCount = med.A_AM # --> Cantidad de Turnos a distribuir
-        med.Fq = (Count_AM / med.TCount) # --> Frecuencia
+        med.Fq = (C_AM / med.TCount) # --> Frecuencia
         med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
         heapq.heappush(TuList, (med.Pri, med.id, med.TCount, med.Fq))
 
 LongListAM = []
 AssignCount = 0
-while Count_AM > AssignCount:
+while C_AM > AssignCount:
     B = heapq.heappop(TuList)
     if B[2] > 0:
         LongListAM.append(Medicos[B[1]].id)
@@ -694,7 +702,7 @@ for L in LongListAM:
 InsD = 0
 for D in Dia:
     # print(D.fecha.isoweekday())
-    if D.fecha.isoweekday() < 6:
+    if (D.fecha.isoweekday() < 6) and (D.Feriado != 1):
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_AM == 'Sin asignar':
@@ -713,6 +721,7 @@ for D in Dia:
                 if Intentos > Tolerancia:
                     Listo = True
                     Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                    D.conflict += C[1] + ' con conflicto vacaciones -'
                 if Listo == True:
                     break
             # print(C)
@@ -726,13 +735,13 @@ for med in Medicos:
 
 
         med.TCount = med.A_PM # --> Cantidad de Turnos a distribuir
-        med.Fq = (Count_PM / med.TCount) # --> Frecuencia
+        med.Fq = (C_PM / med.TCount) # --> Frecuencia
         med.Pri = med.Fq / 2        # ---> Prioridad? claro, creo que es el orden...
         heapq.heappush(TuList, (med.Pri, med.id, med.TCount, med.Fq))
 
 LongListPM = []
 AssignCount = 0
-while Count_PM > AssignCount:
+while C_PM > AssignCount:
     B = heapq.heappop(TuList)
     if B[2] > 0:
         LongListPM.append(Medicos[B[1]].id)
@@ -751,7 +760,7 @@ for L in LongListPM:
 InsD = 0
 for D in Dia:
     # print(D.fecha.isoweekday())
-    if D.fecha.isoweekday() < 5:
+    if (D.fecha.isoweekday() < 5) and (D.Feriado != 1):
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_PM == 'Sin asignar':
@@ -770,6 +779,8 @@ for D in Dia:
                 if Intentos > Tolerancia:
                     Listo = True
                     Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                    D.conflict += C[1] + ' con conflicto vacaciones '
+
                 if Listo == True:
                     break
             # print(C)
@@ -810,7 +821,7 @@ for L in LongListWeekEnd:
 InsD = 0
 for D in Dia:
     # print(D.fecha.isoweekday())
-    if D.fecha.isoweekday() > 5:
+    if (D.fecha.isoweekday() > 5) and (D.Feriado != 1):
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_AM == 'Sin asignar':
@@ -832,6 +843,8 @@ for D in Dia:
                 if Intentos > Tolerancia:
                     Listo = True
                     Conflictos.append([D.fecha,C[1],'Conflicto de Vacaciones a revisar'])
+                    D.conflict += C[1] + ' con conflicto vacaciones '
+
                 if Listo == True:
                     break
             # print(C)
@@ -889,7 +902,7 @@ for L in LongListFridayPM:
 InsD = 0
 for D in Dia:
     # print(D.fecha.isoweekday())
-    if D.fecha.isoweekday() == 5:
+    if (D.fecha.isoweekday() == 5) and (D.Feriado != 1):
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_PM == 'Sin asignar':
@@ -909,6 +922,8 @@ for D in Dia:
                 if Intentos > Tolerancia:
                     Listo = True
                     Conflictos.append([D.fecha, C[1], 'Conflicto de Vacaciones a revisar'])
+                    D.conflict += C[1] + ' con conflicto vacaciones '
+
                 if Listo == True:
                     break
             D.N_PM = C[1]
@@ -944,7 +959,7 @@ for L in LongListNight:
 InsD = 0
 for D in Dia:
     # print(D.fecha.isoweekday())
-    if D.fecha.isoweekday() < 6:
+    if (D.fecha.isoweekday() < 6) and (D.Feriado != 1):
         # print('+++++++++++++++++++++')
         # print(Dia.index(D))
         if D.N_Night == 'Sin asignar':
@@ -963,6 +978,8 @@ for D in Dia:
                 if Intentos > Tolerancia:
                     Listo = True
                     Conflictos.append([D.fecha, C[1], 'Conflicto de Vacaciones a revisar'])
+                    D.conflict += C[1] + ' con conflicto vacaciones '
+
                 if Listo == True:
                     break
             # print(C)
@@ -980,8 +997,12 @@ for D in Dia:
     print('Mañana la hace: ', D.N_AM)
     print('Tarde la hace : ', D.N_PM)
     print('Noche la hace : ', D.N_Night)
-    ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night])
-    Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche']
+    deVacaciones = ' '
+    for med in Medicos:
+        if D.fecha in med.Vacaciones:
+            deVacaciones+= ' - ' + med.nombre
+    ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
+    Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
     Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Git_Hub 8).xlsx', index=None, header=True)
 
@@ -992,6 +1013,9 @@ for D in Dia:
         med.Ch_FridayPM = 0
         med.Ch_WeekEnd = 0
         med.Ch_Carga = 0
+        med.Ch_Sab = 0
+        med.Ch_Dom = 0
+    Ch_Carga_Total = 0
     for ind, row in MedDF.iterrows():
         print(ind)
         #dd = datetime.datetime.strptime(str(row['Fecha']), '%Y-%m-%d %H:%M:%S')
@@ -1001,16 +1025,42 @@ for D in Dia:
             # print(dia.fecha)
             if ddd == dia.fecha:
                 if dia.Feriado != 1:
+                    if dia.fecha.isoweekday() == 6:
+                        med.Ch_Sab += 1
+                    if dia.fecha.isoweekday() == 7:
+                        med.Ch_Dom += 1
+
                     print('El dia ', ddd, 'No es feriado o especial')
                     if dia.tipodia == "Lunes a Jueves":
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_AM += 1
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_PM += 1
+                            if row['Noche'] == med.nombre:
+                                med.Ch_Night += 1
                         AMAM = AM
                         PMPM = PM
                         NightNight = Night
                     elif dia.tipodia == "Viernes":
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_AM += 1
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_FridayPM += 1
+                            if row['Noche'] == med.nombre:
+                                med.Ch_Night += 1
                         AMAM = AM
                         PMPM = FridayPM
                         NightNight = Night
                     elif dia.tipodia == "Fin de Semana":
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
+                            if row['Noche'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
                         AMAM = WeekEnd / 3
                         PMPM = WeekEnd / 3
                         NightNight = WeekEnd / 3
@@ -1033,6 +1083,35 @@ for D in Dia:
 
 # %%
 
+Ch_A = 0
+Ch_T = 0
+CheckTab = []
+for med in Medicos:
+    med.Ch_CargaA = (med.Ch_Carga / Ch_Carga_Total * 100)
+    Ch_A += med.Ch_CargaA
+    med.Ch_CargaT = (med.CargaMax / CargaMaxima * 100)
+    Ch_T += med.Ch_CargaT
+    print(med.nombre, ' carga teorica', med.Ch_CargaT, ' y carga asignada', med.Ch_CargaA)
+    lista = [med.nombre, med.Ch_CargaA, 'Carga Asignada']
+    CheckTab.append(lista)
+    lista = [med.nombre, med.Ch_CargaT, 'Carga Teórica']
+    CheckTab.append(lista)
+    print(med.Ch_Night)
+print(Ch_T, Ch_A)
+
+for med in Medicos:
+    med.periodo = (Periodo - med.Conteo_Vacaciones)/ 30.4
+
+ForPandas8 = []
+for med in Medicos:
+    medListAlpha = [med.nombre, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/med.periodo,
+                    med.Ch_PM/med.periodo,
+                    med.Ch_FridayPM/med.periodo,med.Ch_Night/med.periodo,med.Ch_WeekEnd/med.periodo]
+    ForPandas8.append(medListAlpha)
+Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
+             'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
+MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
+Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (v2022_11).xlsx', index=None, header=True)
 
 # %%
 
@@ -1152,7 +1231,7 @@ for med in Medicos:
                     med.Ch_FridayPM/meses,med.Ch_Night/meses,med.Ch_WeekEnd/meses]
     ForPandas8.append(medListAlpha)
 Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
-             'ViernesTarde/mes','FindeSemana/mes']
+             'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
 # %%
