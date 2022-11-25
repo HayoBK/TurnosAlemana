@@ -28,6 +28,12 @@ Night = 2  # Valor una noche de lunes a viernes 1.5
 WeekEnd = 6.3  # Valor un sabado o un domingo     5.5.
 # Valor WeekEnd es 1.5 veces el valor
 # sumado de AM+PM+Night
+
+# --------------- AJUSTES x VACACIONES ----------------------
+
+Night = 8
+# --------------- -------------------- ----------------------
+
 print('Calculando...')
 # %%
 print('Valoracion de cada tipo de Turno')
@@ -130,29 +136,29 @@ while rfecha <= fecha_final:
 # Terminé armando un M y un N arbitrarios para intentar hacer lo mismo.
 
 
-delta = 10  # año de referencia
-CZERO_AM = 0
-CZERO_PM = 0
-CZERO_Night = 3.66
-CZERO_FridayPM = 1
-CZERO_WeekEnd = 1.33
+delta = 12  # año de referencia
+CZERO_AM = 3
+CZERO_PM = 1
+CZERO_Night = 6
+CZERO_FridayPM = 3
+CZERO_WeekEnd = 1.5
 
 CargaZERO = CZERO_AM * AM + CZERO_PM * PM + CZERO_FridayPM * FridayPM + CZERO_Night * Night + CZERO_WeekEnd * WeekEnd
 
-C12_AM = 4
-C12_PM = 0
-C12_Night = 0
+C12_AM = 9
+C12_PM = 1
+C12_Night = 6
 C12_FridayPM = 0
-C12_WeekEnd = 0.33
+C12_WeekEnd = 1
 
 Carga12 = C12_AM * AM + C12_PM * PM + C12_FridayPM * FridayPM + C12_Night * Night + C12_WeekEnd * WeekEnd
 
 m = (Carga12 - CargaZERO) / delta
 n = delta - m * Carga12
-m = -0.9  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
+#m = -0.4  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
           # ensayo y error logré definir.
 
-n = 16.75
+#n = 16.75
 print('m= ', m)
 print('n= ', n)
 
@@ -308,10 +314,16 @@ for med in Medicos:
     med.CargaReal = 0  # Lo asignado
     if med.Cat != 'AUSENTE':
         med.CargaMax = med.CargaAntiq2021 * CargaMaxima
+
         med.CargaRestante = med.CargaMax
         Check += med.CargaMax
     print(med.nombre, ' tiene una carga a asignar de ', med.CargaMax)
-print('Los siguientes numeros deben ser iguales =', CargaMaxima, ' y ', Check)
+Ch2 =0
+for med in Medicos:
+    med.MagicNumber = med.CargaMax/Check
+    Ch2 += med.MagicNumber
+    print (med.nombre, med.MagicNumber, Ch2)
+print('Los siguientes numeros deben ser iguales =', CargaMaxima, ' y ', Check, ' - ',Ch2)
 # %%
 for dia in Dia:
     NombreAM = 'Sin asignar'
@@ -396,7 +408,7 @@ Check = C_AM
 for med in reversed(Medicos):
 
     med.Factor = med.CargaRestante / CargaRestanteTotal
-    med.A_AM = round(C_AM * med.Factor)
+    med.A_AM = round(C_AM * med.MagicNumber)
     Check -= med.A_AM
     print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
     print('Lo que equivale a los siguientes turnos: ', med.A_AM)
@@ -434,7 +446,7 @@ Check = C_PM
 for med in reversed(Medicos):
 
     med.Factor = med.CargaRestante / CargaRestanteTotal
-    med.A_PM = round(C_PM * med.Factor)
+    med.A_PM = round(C_PM * med.MagicNumber)
     Check -= med.A_PM
     print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
     print('Lo que equivale a los siguientes turnos: ', med.A_PM)
@@ -551,7 +563,7 @@ Check = C_Night
 for med in Medicos:
     if (med.Cat == 'Knight-Tardes') or (med.Cat == 'Master-Mañanas') or (med.Cat == 'Padawan-Sin Fijo'):
         med.Factor = med.CargaRestante / CargaRestanteTotal
-        med.A_Night = round(C_Night * med.Factor)
+        med.A_Night = round(C_Night * med.MagicNumber) #ERa MEd.Factor
         Check -= med.A_Night
         print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
         print('Lo que equivale a los siguientes turnos: ', med.A_Night)
@@ -1024,10 +1036,13 @@ for D in Dia:
             # print(dia.fecha)
             if ddd == dia.fecha:
                 if dia.Feriado != 1:
-                    if dia.fecha.isoweekday() == 6:
-                        med.Ch_Sab += 1
-                    if dia.fecha.isoweekday() == 7:
-                        med.Ch_Dom += 1
+                    for med in Medicos:
+                        if dia.fecha.isoweekday() == 6:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_Sab += 1
+                        if dia.fecha.isoweekday() == 7:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_Dom += 1
 
                     print('El dia ', ddd, 'No es feriado o especial')
                     if dia.tipodia == "Lunes a Jueves":
@@ -1103,11 +1118,13 @@ for med in Medicos:
 
 ForPandas8 = []
 for med in Medicos:
-    medListAlpha = [med.nombre, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/med.periodo,
+    medListAlpha = [med.nombre, med.ingreso,med.Antiq, med.Cat,med.Conteo_Vacaciones, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,
+                    med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/med.periodo,
                     med.Ch_PM/med.periodo,
                     med.Ch_FridayPM/med.periodo,med.Ch_Night/med.periodo,med.Ch_WeekEnd/med.periodo]
     ForPandas8.append(medListAlpha)
-Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
+Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias de vacaciones', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches',
+             'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (v2022_11).xlsx', index=None, header=True)
@@ -1225,7 +1242,7 @@ MedDF9 = pd.DataFrame(CheckTab, columns=Columnas6)
 # %%
 ForPandas8 = []
 for med in Medicos:
-    medListAlpha = [med.nombre, med.ingreso.fecha,med.Antiq, med.Cat,med.Conteo_Vacaciones,med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,
+    medListAlpha = [med.nombre, med.ingreso,med.Antiq, med.Cat,med.Conteo_Vacaciones,med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,
                     med.Ch_WeekEnd,
                     med.Ch_Sab,med.Ch_Dom,
                     med.Ch_AM/meses,
