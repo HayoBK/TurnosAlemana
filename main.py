@@ -393,13 +393,13 @@ for med in Medicos:
 print()
 
 Check = C_AM
-for med in Medicos:
-    if med.Cat == 'Padawan-Sin Fijo':
-        med.Factor = med.CargaRestante / CargaRestanteTotal
-        med.A_AM = round(C_AM * med.Factor)
-        Check -= med.A_AM
-        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
-        print('Lo que equivale a los siguientes turnos: ', med.A_AM)
+for med in reversed(Medicos):
+
+    med.Factor = med.CargaRestante / CargaRestanteTotal
+    med.A_AM = round(C_AM * med.Factor)
+    Check -= med.A_AM
+    print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+    print('Lo que equivale a los siguientes turnos: ', med.A_AM)
 
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
@@ -407,13 +407,13 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_AM = Check
 while Check != 0:
     for med in reversed(Medicos):
-        if med.Cat == 'Padawan-Sin Fijo':
-            if Check > 0:
-                med.A_AM += 1
-                Check -= 1
-            if Check < 0:
-                med.A_AM -= 1
-                Check += 1
+
+        if Check > 0:
+            med.A_AM += 1
+            Check -= 1
+        if Check < 0:
+            med.A_AM -= 1
+            Check += 1
 
 print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_AM = Check
@@ -423,22 +423,21 @@ print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
 # Asignar Numero Tardes Lu-Ju pendientes por vacaciones
 # update Carga
 CargaRestanteTotal = 0
-for med in Medicos:
-    if med.Cat == 'Padawan-Sin Fijo':
-        med.CargaRestante = med.CargaMax - med.CargaReal
-        CargaRestanteTotal += med.CargaRestante
-        print('A ', med.nombre, ' queda por asignarle: ', med.CargaRestante)
+for med in reversed(Medicos):
+    med.CargaRestante = med.CargaMax - med.CargaReal
+    CargaRestanteTotal += med.CargaRestante
+    print('A ', med.nombre, ' queda por asignarle: ', med.CargaRestante)
 
 print()
 
 Check = C_PM
-for med in Medicos:
-    if med.Cat == 'Padawan-Sin Fijo':
-        med.Factor = med.CargaRestante / CargaRestanteTotal
-        med.A_PM = round(C_PM * med.Factor)
-        Check -= med.A_PM
-        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
-        print('Lo que equivale a los siguientes turnos: ', med.A_PM)
+for med in reversed(Medicos):
+
+    med.Factor = med.CargaRestante / CargaRestanteTotal
+    med.A_PM = round(C_PM * med.Factor)
+    Check -= med.A_PM
+    print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+    print('Lo que equivale a los siguientes turnos: ', med.A_PM)
 
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
@@ -446,13 +445,13 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_PM = Check
 while Check != 0:
     for med in reversed(Medicos):
-        if med.Cat == 'Padawan-Sin Fijo':
-            if Check > 0:
-                med.A_PM += 1
-                Check -= 1
-            if Check < 0:
-                med.A_PM -= 1
-                Check += 1
+
+        if Check > 0:
+            med.A_PM += 1
+            Check -= 1
+        if Check < 0:
+            med.A_PM -= 1
+            Check += 1
 
 print('Turno de Tardes Lu-Vi sin asingar -error - : ', Check)
 #C_PM = Check
@@ -635,7 +634,7 @@ for med in Medicos:
                  'Tardes en el periodo', 'Viernes Tardes en el periodo', 'Noches en el periodo', 'Fines de Semana en el periodo', 'Mañanas promedio al mes',
                  'Tardes promedio al mes', 'Viernes promedio Tardes al mes', 'Noches promedio al mes', 'Fines de Semana promedio al mes']
     MedDF = pd.DataFrame(ForPandas, columns=Columnas2)
-    Export2 = MedDF.to_excel('AA - Medicos Abril-Diciembre 2021.xlsx', index=None, header=True)
+#    Export2 = MedDF.to_excel('AA - Medicos Abril-Diciembre 2021.xlsx', index=None, header=True)
     # Columnas = 'Medico','Antiguedad','Categoria','Carga Teorica','Carga Real','Carga Real Bruta','SobreCarga(pctje)','Mañanas','Tardes','Noches','Viernes Tardes', 'Viernes Noches', 'Sabados', 'Domingos'
     Antiguedad.append(med.Antiq)
     Carga.append(med.CargaPorcentual)
@@ -1226,14 +1225,19 @@ MedDF9 = pd.DataFrame(CheckTab, columns=Columnas6)
 # %%
 ForPandas8 = []
 for med in Medicos:
-    medListAlpha = [med.nombre, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/meses,
+    medListAlpha = [med.nombre, med.ingreso.fecha,med.Antiq, med.Cat,med.Conteo_Vacaciones,med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,
+                    med.Ch_WeekEnd,
+                    med.Ch_Sab,med.Ch_Dom,
+                    med.Ch_AM/meses,
                     med.Ch_PM/meses,
                     med.Ch_FridayPM/meses,med.Ch_Night/meses,med.Ch_WeekEnd/meses]
     ForPandas8.append(medListAlpha)
-Columnas2 = ['Medico', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
+Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias de vacaciones', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches','Fines de Semana','Sábados','Domingos',
+             'Mañanas/mes',
+             'Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
+#Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
 # %%
 print('Conflictos:')
 for con in Conflictos:
