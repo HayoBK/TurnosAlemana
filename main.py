@@ -239,7 +239,7 @@ check3 = 0
 Medicos[11].Vacas(2023,1,1,2023,1,16)
 Medicos[11].Vacas(2023,2,1,2023,2,15)
 #Arredondo
-Medicos[5].Vacas(2023,2,6,2023,3,5)
+Medicos[5].Vacas(2023,2,6,2023,3,1) # 5 de marzo
 #Boettiger
 Medicos[13].Vacas(2023,1,1,2023,1,23)
 #Breinbauer
@@ -247,7 +247,7 @@ Medicos[4].Vacas(2023,2,1,2023,2,28)
 #Carrasco
 Medicos[6].Vacas(2023,1,20,2023,2,12)
 #Contreras
-Medicos[8].Vacas(2023,2,27,2023,3,31)
+Medicos[8].Vacas(2023,2,27,2023,3,1) # 31 de marzo
 #Culaciati
 Medicos[7].Vacas(2023,2,1,2023,2,28)
 #Fernandez
@@ -258,7 +258,7 @@ Medicos[1].Vacas(2023,1,21,2023,2,19)
 Medicos[3].Vacas(2023,1,1,2023,1,31)
 #Loch
 Medicos[14].Vacas(2023,1,9,2023,1,22)
-Medicos[14].Vacas(2023,2,20,2023,3,5)
+Medicos[14].Vacas(2023,2,20,2023,3,1) # 5 de marzo
 #Pio
 Medicos[10].Vacas(2023,2,1,2023,2,28)
 #Ramos
@@ -1026,7 +1026,10 @@ for D in Dia:
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
     Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Git_Hub 8).xlsx', index=None, header=True)
-
+    #           I
+    #           I   Bloquea la proxima linea para bloquear la revisión Manual.
+    #           V
+    MedDF = pd.read_excel('Manual.xlsx')
     for med in Medicos:
         med.Ch_AM = 0
         med.Ch_PM = 0
@@ -1055,7 +1058,7 @@ for D in Dia:
                                 med.Ch_Dom += 1
 
                     print('El dia ', ddd, 'No es feriado o especial')
-                    if dia.tipodia == "Lunes a Jueves":
+                    if dia.fecha.isoweekday() < 5:
                         for med in Medicos:
                             if row['Mañana'] == med.nombre:
                                 med.Ch_AM += 1
@@ -1066,7 +1069,7 @@ for D in Dia:
                         AMAM = AM
                         PMPM = PM
                         NightNight = Night
-                    elif dia.tipodia == "Viernes":
+                    elif dia.fecha.isoweekday() == 5:
                         for med in Medicos:
                             if row['Mañana'] == med.nombre:
                                 med.Ch_AM += 1
@@ -1077,7 +1080,7 @@ for D in Dia:
                         AMAM = AM
                         PMPM = FridayPM
                         NightNight = Night
-                    elif dia.tipodia == "Fin de Semana":
+                    elif dia.fecha.isoweekday() > 5:
                         for med in Medicos:
                             if row['Mañana'] == med.nombre:
                                 med.Ch_WeekEnd += (1 / 3)
@@ -1100,7 +1103,6 @@ for D in Dia:
                         if row['Noche'] == med.nombre:
                             med.Ch_Carga += NightNight
                             Ch_Carga_Total += NightNight
-                            med.Ch_Night += 1
                     print(Ch_Carga_Total)
                 else:
                     print('El dia ', ddd, 'ES FERIADO O ESPECIAL')
@@ -1177,7 +1179,7 @@ for ind, row in CheckT.iterrows():
                     med.Ch_Dom+=1
 
                 print('El dia ', ddd, 'No es feriado o especial')
-                if dia.tipodia == "Lunes a Jueves":
+                if dia.fecha.isoweekday()<5:
                     for med in Medicos:
                         if row['Mañana'] == med.nombre:
                             med.Ch_AM += 1
@@ -1188,7 +1190,7 @@ for ind, row in CheckT.iterrows():
                     AMAM = AM
                     PMPM = PM
                     NightNight = Night
-                elif dia.tipodia == "Viernes":
+                elif dia.fecha.isoweekday() == 5:
                     for med in Medicos:
                         if row['Mañana'] == med.nombre:
                             med.Ch_AM += 1
@@ -1199,7 +1201,7 @@ for ind, row in CheckT.iterrows():
                     AMAM = AM
                     PMPM = FridayPM
                     NightNight = Night
-                elif dia.tipodia == "Fin de Semana":
+                elif dia.fecha.isoweekday() > 5:
                     for med in Medicos:
                         if row['Mañana'] == med.nombre:
                             med.Ch_WeekEnd += (1/3)
