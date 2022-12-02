@@ -56,7 +56,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 3  # meses a evaluar y asignar
+meses = 2  # meses a evaluar y asignar
 
 
 class UnDia:
@@ -113,7 +113,7 @@ class UnDia:
 # Fijar fechas de inicio y final de la generación
 # de turnoS
 fecha_inicio = datetime.date(2023, 1, 1)
-fecha_final = datetime.date(2023, 4, 1)
+fecha_final = datetime.date(2023, 3, 1)
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -155,10 +155,10 @@ Carga12 = C12_AM * AM + C12_PM * PM + C12_FridayPM * FridayPM + C12_Night * Nigh
 
 m = (Carga12 - CargaZERO) / delta
 n = delta - m * Carga12
-#m = -0.4  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
+m = -0.25  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
           # ensayo y error logré definir.
 
-#n = 16.75
+n = 16.75
 print('m= ', m)
 print('n= ', n)
 
@@ -257,13 +257,14 @@ Medicos[1].Vacas(2023,1,21,2023,2,19)
 #Iñiguez
 Medicos[3].Vacas(2023,1,1,2023,1,31)
 #Loch
-Medicos[14].Vacas(2023,1,30,2023,2,19)
+Medicos[14].Vacas(2023,1,9,2023,1,22)
+Medicos[14].Vacas(2023,2,20,2023,3,5)
 #Pio
 Medicos[10].Vacas(2023,2,1,2023,2,28)
 #Ramos
 Medicos[12].Vacas(2023,1,4,2023,1,18)
 #Rubio
-Medicos[15].Vacas(2023,1,30,2023,2,20)
+Medicos[15].Vacas(2023,1,14,2023,1,29)
 #Cisternas
 Medicos[9].Vacas(2023,2,5,2023,2,19)
 #Bravo
@@ -396,22 +397,28 @@ for med in Medicos:
 # Asignar Numero Mañanas pendientes por vacaciones
 # update Carga
 CargaRestanteTotal = 0
+MagicCarga=0
 for med in Medicos:
     if med.Cat == 'Padawan-Sin Fijo':
+        MagicCarga+=med.MagicNumber
         med.CargaRestante = med.CargaMax - med.CargaReal
         CargaRestanteTotal += med.CargaRestante
         print('A ', med.nombre, ' queda por asignarle: ', med.CargaRestante)
+for med in Medicos:
+    if med.Cat == 'Padawan-Sin Fijo':
+        med.Factor=med.MagicNumber/MagicCarga
 
 print()
 
 Check = C_AM
 for med in reversed(Medicos):
+    if med.Cat == 'Padawan-Sin Fijo':
 
-    med.Factor = med.CargaRestante / CargaRestanteTotal
-    med.A_AM = round(C_AM * med.MagicNumber)
-    Check -= med.A_AM
-    print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
-    print('Lo que equivale a los siguientes turnos: ', med.A_AM)
+    #med.Factor = med.CargaRestante / CargaRestanteTotal
+        med.A_AM = round(C_AM * med.Factor)
+        Check -= med.A_AM
+        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+        print('Lo que equivale a los siguientes turnos: ', med.A_AM)
 
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
@@ -419,13 +426,14 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_AM = Check
 while Check != 0:
     for med in reversed(Medicos):
+        if med.Cat == 'Padawan-Sin Fijo':
 
-        if Check > 0:
-            med.A_AM += 1
-            Check -= 1
-        if Check < 0:
-            med.A_AM -= 1
-            Check += 1
+            if Check > 0:
+                med.A_AM += 1
+                Check -= 1
+            if Check < 0:
+                med.A_AM -= 1
+                Check += 1
 
 print('Turno de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_AM = Check
@@ -444,12 +452,13 @@ print()
 
 Check = C_PM
 for med in reversed(Medicos):
+    if med.Cat == 'Padawan-Sin Fijo':
 
-    med.Factor = med.CargaRestante / CargaRestanteTotal
-    med.A_PM = round(C_PM * med.MagicNumber)
-    Check -= med.A_PM
-    print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
-    print('Lo que equivale a los siguientes turnos: ', med.A_PM)
+    #med.Factor = med.CargaRestante / CargaRestanteTotal
+        med.A_PM = round(C_PM * med.Factor)
+        Check -= med.A_PM
+        print('A ', med.nombre, ' le corresponde proporcionalmente asignar: ', med.Factor)
+        print('Lo que equivale a los siguientes turnos: ', med.A_PM)
 
 print()
 print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
@@ -457,13 +466,14 @@ print('Turnos de Mañanas Lu-Vi sin asingar -error - : ', Check)
 #C_PM = Check
 while Check != 0:
     for med in reversed(Medicos):
+        if med.Cat == 'Padawan-Sin Fijo':
 
-        if Check > 0:
-            med.A_PM += 1
-            Check -= 1
-        if Check < 0:
-            med.A_PM -= 1
-            Check += 1
+            if Check > 0:
+                med.A_PM += 1
+                Check -= 1
+            if Check < 0:
+                med.A_PM -= 1
+                Check += 1
 
 print('Turno de Tardes Lu-Vi sin asingar -error - : ', Check)
 #C_PM = Check
