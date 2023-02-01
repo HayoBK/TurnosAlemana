@@ -2,7 +2,7 @@
 # Versión 2022_Noviembre para programación de turnos Vacaciones Ene-Marzo 2023
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
-# En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
+# En linea 186 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
 #   en la mitad del periodo que estamos evaluando.
 # ---------------------------------------------------------------------------------
 
@@ -70,6 +70,48 @@ class UnDia:
         F = []
         F.append(datetime.date(2023, 1, 1))
         F.append(datetime.date(2023, 1, 2))
+        F.append(datetime.date(2023, 4, 7))
+        F.append(datetime.date(2023, 4, 8))
+        F.append(datetime.date(2023, 4, 29))
+        F.append(datetime.date(2023, 4, 30))
+        F.append(datetime.date(2023, 5, 1))
+        F.append(datetime.date(2023, 6, 21))
+        F.append(datetime.date(2023, 6, 24))
+        F.append(datetime.date(2023, 6, 25))
+        F.append(datetime.date(2023, 6, 26))
+
+        F.append(datetime.date(2023, 8, 15))
+        F.append(datetime.date(2023, 9, 16))
+        F.append(datetime.date(2023, 9, 17))
+        F.append(datetime.date(2023, 9, 18))
+        F.append(datetime.date(2023, 9, 19))
+
+        F.append(datetime.date(2023, 10, 7))
+        F.append(datetime.date(2023, 10, 8))
+        F.append(datetime.date(2023, 10, 9))
+        F.append(datetime.date(2023, 10, 27))
+        F.append(datetime.date(2023, 10, 28))
+        F.append(datetime.date(2023, 10, 29))
+
+        F.append(datetime.date(2023, 11, 1))
+        F.append(datetime.date(2023, 12, 8))
+        F.append(datetime.date(2023, 12, 9))
+        F.append(datetime.date(2023, 12, 10))
+
+        F.append(datetime.date(2023, 12, 23))
+        F.append(datetime.date(2023, 12, 24))
+        F.append(datetime.date(2023, 12, 25))
+
+        F.append(datetime.date(2023, 12, 30))
+        F.append(datetime.date(2023, 12, 31))
+        F.append(datetime.date(2024, 1, 1))
+
+
+
+
+
+
+
         # ------------------------------------------------
 
         self.Feriado = 0
@@ -112,8 +154,8 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generación
 # de turnoS
-fecha_inicio = datetime.date(2023, 1, 1)
-fecha_final = datetime.date(2023, 3, 1)
+fecha_inicio = datetime.date(2023, 3, 1)
+fecha_final = datetime.date(2024, 1, 1)
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -186,7 +228,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2023, 2, 14)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = datetime.date(2023, 8, 1)  # Aqui se fija el dia en el que se mide antiguedad
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -235,6 +277,12 @@ Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
+
+#Periodo Marzo- Diciembre 2023
+#Daniela Contreras
+Medicos[8].Vacas(2023,3,6,2023,4,2) #
+
+
 #Alvo
 Medicos[11].Vacas(2023,1,1,2023,1,16)
 Medicos[11].Vacas(2023,2,1,2023,2,15)
@@ -1029,7 +1077,7 @@ for D in Dia:
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
-    MedDF = pd.read_excel('Manual.xlsx')
+    # MedDF = pd.read_excel('Manual.xlsx')
     for med in Medicos:
         med.Ch_AM = 0
         med.Ch_PM = 0
