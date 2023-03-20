@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2022_Noviembre para programación de turnos Vacaciones Ene-Marzo 2023
+# Versión 2023_Marzo para programación de turnos  ABril Diciembre 2023
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 186 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -16,6 +16,21 @@ import datetime
 from datetime import timedelta
 
 import matplotlib.pyplot as plt
+
+#----------------------------------------
+#   AQUI LO IMPORTANTE A ACTUALIZAR
+#----------------------------------------
+
+ultimate_meses = 9
+#Actualiza lista de feriados cerca de linea 80
+fecha_inicio = datetime.date(2023, 4, 1)
+fecha_final = datetime.date(2024, 1, 1)
+MEDIDA_ANTIGUEDAD = fecha_inicio + (fecha_final - fecha_inicio)/2
+
+
+#----------------------------------------
+#----------------------------------------
+
 
 # %%
 COVID_Val_DS = 1  # Valor dia de semana
@@ -56,7 +71,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 2  # meses a evaluar y asignar
+meses =  ultimate_meses # meses a evaluar y asignar
 
 
 class UnDia:
@@ -154,8 +169,7 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generación
 # de turnoS
-fecha_inicio = datetime.date(2023, 3, 1)
-fecha_final = datetime.date(2024, 1, 1)
+
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -228,7 +242,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2023, 8, 1)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = MEDIDA_ANTIGUEDAD   # Aqui se fija el dia en el que se mide antiguedad
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -259,8 +273,8 @@ class Medico:
 
 Medicos = []
 Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Master-Mañanas'))
-Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Master-Mañanas'))
+Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
 Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Master-Mañanas'))
 Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Master-Mañanas'))
 Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
