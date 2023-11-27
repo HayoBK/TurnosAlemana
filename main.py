@@ -242,7 +242,7 @@ Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
 Medicos[10].Vacas(2024,1,20,2024,2,19)
 Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
 Medicos[11].Vacas(2024,2,19,2024,3,17)
-Medicos.append(Medico(12, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
 Medicos[12].Vacas(2024,1,14,2025,1,1)
 Medicos.append(Medico(13, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
 Medicos[13].Vacas(2024,1,27,2024,2,24)
@@ -254,33 +254,6 @@ Medicos[15].Vacas(2024,1,15,2024,1,28)
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
-
-#Arredondo
-#Boettiger
-Medicos[13].Vacas(2023,1,1,2023,1,23)
-#Breinbauer
-Medicos[4].Vacas(2023,2,1,2023,2,28)
-#Carrasco
-
-#Contreras
-#Culaciati
-#Fernandez
-Medicos[0].Vacas(2023,1,30,2023,2,26)
-#Gomez
-
-#Iñiguez
-
-#Loch
-Medicos[14].Vacas(2023,2,20,2023,3,1) # 5 de marzo
-#Pio
-#Ramos
-Medicos[12].Vacas(2023,1,4,2023,1,18)
-#Rubio
-#Cisternas
-
-#Bravo
-Medicos[2].Vacas(2023,1,20,2023,2,17)
-
 
 
 
@@ -595,12 +568,13 @@ C_Night = Check
 
 while Check != 0:
     for med in reversed(Medicos):
-        if Check > 0:
-            med.A_Night += 1
-            Check -= 1
-        if Check < 0:
-            med.A_Night -= 1
-            Check += 1
+        if (med.Cat != 'Yoda-Sin Noches'):
+            if Check > 0:
+                med.A_Night += 1
+                Check -= 1
+            if Check < 0:
+                med.A_Night -= 1
+                Check += 1
 
 print('Turno de Noche sin asingar -error - : ', Check)
 C_Night = Check
