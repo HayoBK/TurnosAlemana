@@ -4,6 +4,7 @@
 # En linea 60 --> añadir lista de Feriados
 # En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
 #   en la mitad del periodo que estamos evaluando.
+
 # ---------------------------------------------------------------------------------
 
 # %%
@@ -216,6 +217,7 @@ class Medico:
             V1=V1 + timedelta(days=1)
 
 Medicos = []
+
 Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
 Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
 Medicos[1].Vacas(2024,1,20,2024,2,20)
