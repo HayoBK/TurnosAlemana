@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2022_Noviembre para programación de turnos Vacaciones Ene-Marzo 2023
+# Versión 2023_Noviembre para programación de turnos Vacaciones Ene-Marzo 2024
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -56,7 +56,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 2  # meses a evaluar y asignar
+meses = 3  # meses a evaluar y asignar
 
 
 class UnDia:
@@ -68,8 +68,8 @@ class UnDia:
         self.conflict = " - "
         # Aquí añadir lista de feriados y días especiales.
         F = []
-        F.append(datetime.date(2023, 1, 1))
-        F.append(datetime.date(2023, 1, 2))
+        F.append(datetime.date(2024, 1, 1))
+        F.append(datetime.date(2024, 3, 29))
         # ------------------------------------------------
 
         self.Feriado = 0
@@ -112,8 +112,8 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generación
 # de turnoS
-fecha_inicio = datetime.date(2023, 1, 1)
-fecha_final = datetime.date(2023, 3, 1)
+fecha_inicio = datetime.date(2024, 1, 1)
+fecha_final = datetime.date(2024, 4, 1)
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -186,7 +186,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2023, 2, 14)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = datetime.date(2024, 2, 14)  # Aqui se fija el dia en el que se mide antiguedad
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -217,56 +217,65 @@ class Medico:
 
 Medicos = []
 Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Master-Mañanas'))
-Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Master-Mañanas'))
-Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Master-Mañanas'))
-Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Master-Mañanas'))
+Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos[1].Vacas(2024,1,20,2024,2,20)
+Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos[2].Vacas(2024,3,1,2024,3,31)
+Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos[3].Vacas(2024,1,3,2024,1,28)
+Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos[4].Vacas(2024,1,1,2024,1,7)
+Medicos[4].Vacas(2024,2,5,2024,2,25)
 Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[5].Vacas(2024,2,1,2023,2,29) # 5 de marzo
 Medicos.append(Medico(6, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[6].Vacas(2024,1,3,2024,1,28)
 Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[7].Vacas(2024,1,29,2023,2,26)
 Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
+Medicos[8].Vacas(2024,2,1,2023,2,29) # 31 de marzo
 Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
+Medicos[9].Vacas(2024,1,15,2024,1,28)
 Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
+Medicos[10].Vacas(2023,1,20,2023,2,19)
 Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
+Medicos[11].Vacas(2024,2,19,2024,3,17)
 Medicos.append(Medico(12, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
+Medicos[12].Vacas(2024,1,14,2025,1,1)
 Medicos.append(Medico(13, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos[13].Vacas(2024,1,27,2024,2,24)
 Medicos.append(Medico(14, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[14].Vacas(2024,1,8,2024,2,4)
 Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[15].Vacas(2024,1,15,2024,1,28)
+
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
-#Alvo
-Medicos[11].Vacas(2023,1,1,2023,1,16)
-Medicos[11].Vacas(2023,2,1,2023,2,15)
+
 #Arredondo
-Medicos[5].Vacas(2023,2,6,2023,3,1) # 5 de marzo
 #Boettiger
 Medicos[13].Vacas(2023,1,1,2023,1,23)
 #Breinbauer
 Medicos[4].Vacas(2023,2,1,2023,2,28)
 #Carrasco
-Medicos[6].Vacas(2023,1,20,2023,2,12)
+
 #Contreras
-Medicos[8].Vacas(2023,2,27,2023,3,1) # 31 de marzo
 #Culaciati
-Medicos[7].Vacas(2023,2,1,2023,2,28)
 #Fernandez
 Medicos[0].Vacas(2023,1,30,2023,2,26)
 #Gomez
-Medicos[1].Vacas(2023,1,21,2023,2,19)
+
 #Iñiguez
-Medicos[3].Vacas(2023,1,1,2023,1,31)
+
 #Loch
-Medicos[14].Vacas(2023,1,9,2023,1,22)
 Medicos[14].Vacas(2023,2,20,2023,3,1) # 5 de marzo
 #Pio
-Medicos[10].Vacas(2023,2,1,2023,2,28)
 #Ramos
 Medicos[12].Vacas(2023,1,4,2023,1,18)
 #Rubio
-Medicos[15].Vacas(2023,1,14,2023,1,29)
 #Cisternas
-Medicos[9].Vacas(2023,2,5,2023,2,19)
+
 #Bravo
 Medicos[2].Vacas(2023,1,20,2023,2,17)
 
