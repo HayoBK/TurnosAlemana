@@ -229,17 +229,17 @@ Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
 Medicos[4].Vacas(2024,1,1,2024,1,7)
 Medicos[4].Vacas(2024,2,5,2024,2,25)
 Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
-Medicos[5].Vacas(2024,2,1,2023,2,29) # 5 de marzo
+Medicos[5].Vacas(2024,2,1,2024,2,29) # 5 de marzo
 Medicos.append(Medico(6, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
 Medicos[6].Vacas(2024,1,3,2024,1,28)
 Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
-Medicos[7].Vacas(2024,1,29,2023,2,26)
+Medicos[7].Vacas(2024,1,29,2024,2,26)
 Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
-Medicos[8].Vacas(2024,2,1,2023,2,29) # 31 de marzo
+Medicos[8].Vacas(2024,2,1,2024,2,29) # 31 de marzo
 Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
 Medicos[9].Vacas(2024,1,15,2024,1,28)
 Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos[10].Vacas(2023,1,20,2023,2,19)
+Medicos[10].Vacas(2024,1,20,2024,2,19)
 Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
 Medicos[11].Vacas(2024,2,19,2024,3,17)
 Medicos.append(Medico(12, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
@@ -1036,11 +1036,11 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Git_Hub 8).xlsx', index=None, header=True)
+    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Vacaciones2024).xlsx', index=None, header=True)
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
-    MedDF = pd.read_excel('Manual.xlsx')
+    #MedDF = pd.read_excel('Manual.xlsx')
     for med in Medicos:
         med.Ch_AM = 0
         med.Ch_PM = 0
@@ -1150,7 +1150,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (v2022_11).xlsx', index=None, header=True)
+Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (version Vacaciones 2024).xlsx', index=None, header=True)
 
 # %%
 
