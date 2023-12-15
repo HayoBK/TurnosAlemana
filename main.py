@@ -71,6 +71,8 @@ class UnDia:
         F = []
         F.append(datetime.date(2024, 1, 1))
         F.append(datetime.date(2024, 3, 29))
+        F.append(datetime.date(2024, 3, 30))
+        F.append(datetime.date(2024, 3, 31))
         # ------------------------------------------------
 
         self.Feriado = 0
@@ -219,6 +221,7 @@ class Medico:
 Medicos = []
 
 Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
+Medicos[0].Vacas(2024,2,1,2100,2,20)
 Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
 Medicos[1].Vacas(2024,1,20,2024,2,20)
 Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
@@ -236,22 +239,22 @@ Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
 Medicos[7].Vacas(2024,1,29,2024,2,26)
 Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
 Medicos[8].Vacas(2024,2,1,2024,2,29) # 31 de marzo
-Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
+Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
 Medicos[9].Vacas(2024,1,15,2024,1,28)
 Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
 Medicos[10].Vacas(2024,1,20,2024,2,19)
 Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
 Medicos[11].Vacas(2024,2,19,2024,3,17)
-Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
-Medicos[12].Vacas(2024,1,14,2025,1,1)
-Medicos.append(Medico(13, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos[13].Vacas(2024,1,27,2024,2,24)
-Medicos.append(Medico(14, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[14].Vacas(2024,1,8,2024,2,4)
-Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[15].Vacas(2024,1,15,2024,1,28)
+#Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
+#Medicos[12].Vacas(2024,1,14,2025,1,1)
+Medicos.append(Medico(12, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos[12].Vacas(2024,1,27,2024,2,24)
+Medicos.append(Medico(13, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[13].Vacas(2024,1,8,2024,2,4)
+Medicos.append(Medico(14, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[14].Vacas(2024,1,15,2024,1,28)
 
-Max_Medicos_id = 15
+Max_Medicos_id = 14
 check2 = 0
 check3 = 0
 
@@ -319,15 +322,15 @@ for dia in Dia:
     if dia.Feriado == 0:
         if dia.fecha.isoweekday() == 1:
             NombreAM = 'Gomez'
-            NombrePM = 'Carrasco'
+            NombrePM = 'Cisternas'
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
             NombreAM = 'Iñiguez'
             NombrePM = 'Contreras'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
-            NombreAM = 'Fernandez'
-            NombrePM = 'Arredondo'
+            NombreAM = 'Arredondo'
+            NombrePM = 'Carrasco'
             dia.wDay = 'Miércoles'
         elif dia.fecha.isoweekday() == 4:
             NombreAM = 'Bravo'
@@ -340,6 +343,59 @@ for dia in Dia:
             dia.wDay = 'Sábado'
         elif dia.fecha.isoweekday() == 7:
             dia.wDay = 'Domingo'
+        #Ajustes extraños por cambios significativos en mitad de periodo
+        Limite1 = datetime.date(2024,2,1)
+        Limite2 = datetime.date(2024,3,1)
+        if dia.fecha < Limite2:
+            if dia.fecha.isoweekday() == 1:
+                NombreAM = 'Gomez'
+                NombrePM = 'Carrasco'
+                dia.wDay = 'Lunes'
+            elif dia.fecha.isoweekday() == 2:
+                NombreAM = 'Iñiguez'
+                NombrePM = 'Contreras'
+                dia.wDay = 'Martes'
+            elif dia.fecha.isoweekday() == 3:
+                NombreAM = 'Arredondo'
+                NombrePM = 'Cisternas'
+                dia.wDay = 'Miércoles'
+            elif dia.fecha.isoweekday() == 4:
+                NombreAM = 'Bravo'
+                NombrePM = 'Culaciati'
+                dia.wDay = 'Jueves'
+            elif dia.fecha.isoweekday() == 5:
+                NombreAM = 'Breinbauer'
+                dia.wDay = 'Viernes'
+            elif dia.fecha.isoweekday() == 6:
+                dia.wDay = 'Sábado'
+            elif dia.fecha.isoweekday() == 7:
+                dia.wDay = 'Domingo'
+
+        if dia.fecha < Limite1:
+            if dia.fecha.isoweekday() == 1:
+                NombreAM = 'Gomez'
+                NombrePM = 'Carrasco'
+                dia.wDay = 'Lunes'
+            elif dia.fecha.isoweekday() == 2:
+                NombreAM = 'Iñiguez'
+                NombrePM = 'Contreras'
+                dia.wDay = 'Martes'
+            elif dia.fecha.isoweekday() == 3:
+                NombreAM = 'Fernandez'
+                NombrePM = 'Arredondo'
+                dia.wDay = 'Miércoles'
+            elif dia.fecha.isoweekday() == 4:
+                NombreAM = 'Bravo'
+                NombrePM = 'Culaciati'
+                dia.wDay = 'Jueves'
+            elif dia.fecha.isoweekday() == 5:
+                NombreAM = 'Breinbauer'
+                dia.wDay = 'Viernes'
+            elif dia.fecha.isoweekday() == 6:
+                dia.wDay = 'Sábado'
+            elif dia.fecha.isoweekday() == 7:
+                dia.wDay = 'Domingo'
+
 
         if dia.fecha.isoweekday() < 6:
             for med in Medicos:
@@ -1014,7 +1070,7 @@ for D in Dia:
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
-    #MedDF = pd.read_excel('Manual.xlsx')
+    #MedDF = pd.read_excel('Vacaciones 2024 Manual.xlsx')
     for med in Medicos:
         med.Ch_AM = 0
         med.Ch_PM = 0
@@ -1127,6 +1183,134 @@ MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (version Vacaciones 2024).xlsx', index=None, header=True)
 
 # %%
+ForPandasCal = []
+for D in Dia:
+    print(D.fecha, ' es ', D.wDay)
+    print('Mañana la hace: ', D.N_AM)
+    print('Tarde la hace : ', D.N_PM)
+    print('Noche la hace : ', D.N_Night)
+    deVacaciones = ' '
+    for med in Medicos:
+        if D.fecha in med.Vacaciones:
+            deVacaciones+= ' - ' + med.nombre
+    ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
+    Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
+    MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
+    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Vacaciones2024).xlsx', index=None, header=True)
+    #           I
+    #           I   Bloquea la proxima linea para bloquear la revisión Manual.
+    #           V
+    MedDF = pd.read_excel('AAA - Calendario con ajuste Manual (version Vacaciones 2024).xlsx')
+    for med in Medicos:
+        med.Ch_AM = 0
+        med.Ch_PM = 0
+        med.Ch_Night = 0
+        med.Ch_FridayPM = 0
+        med.Ch_WeekEnd = 0
+        med.Ch_Carga = 0
+        med.Ch_Sab = 0
+        med.Ch_Dom = 0
+    Ch_Carga_Total = 0
+    for ind, row in MedDF.iterrows():
+        print(ind)
+        #dd = datetime.datetime.strptime(str(row['Fecha']), '%Y-%m-%d %H:%M:%S')
+        ddd = datetime.date(int(row['Año']), int(row['Mes']), int(row['Dia']))
+        # print(ddd)
+        for dia in Dia:
+            # print(dia.fecha)
+            if ddd == dia.fecha:
+                if dia.Feriado != 1:
+                    for med in Medicos:
+                        if dia.fecha.isoweekday() == 6:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_Sab += 1
+                        if dia.fecha.isoweekday() == 7:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_Dom += 1
+
+                    print('El dia ', ddd, 'No es feriado o especial')
+                    if dia.fecha.isoweekday() < 5:
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_AM += 1
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_PM += 1
+                            if row['Noche'] == med.nombre:
+                                med.Ch_Night += 1
+                        AMAM = AM
+                        PMPM = PM
+                        NightNight = Night
+                    elif dia.fecha.isoweekday() == 5:
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_AM += 1
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_FridayPM += 1
+                            if row['Noche'] == med.nombre:
+                                med.Ch_Night += 1
+                        AMAM = AM
+                        PMPM = FridayPM
+                        NightNight = Night
+                    elif dia.fecha.isoweekday() > 5:
+                        for med in Medicos:
+                            if row['Mañana'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
+                            if row['Tarde'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
+                            if row['Noche'] == med.nombre:
+                                med.Ch_WeekEnd += (1 / 3)
+                        AMAM = WeekEnd / 3
+                        PMPM = WeekEnd / 3
+                        NightNight = WeekEnd / 3
+
+                    for med in Medicos:
+                        if row['Mañana'] == med.nombre:
+                            med.Ch_Carga += AMAM
+                            Ch_Carga_Total += AMAM
+
+                        if row['Tarde'] == med.nombre:
+                            med.Ch_Carga += PMPM
+                            Ch_Carga_Total += PMPM
+                        if row['Noche'] == med.nombre:
+                            med.Ch_Carga += NightNight
+                            Ch_Carga_Total += NightNight
+                    print(Ch_Carga_Total)
+                else:
+                    print('El dia ', ddd, 'ES FERIADO O ESPECIAL')
+
+# %%
+
+Ch_A = 0
+Ch_T = 0
+CheckTab = []
+for med in Medicos:
+    med.Ch_CargaA = (med.Ch_Carga / Ch_Carga_Total * 100)
+    Ch_A += med.Ch_CargaA
+    med.Ch_CargaT = (med.CargaMax / CargaMaxima * 100)
+    Ch_T += med.Ch_CargaT
+    print(med.nombre, ' carga teorica', med.Ch_CargaT, ' y carga asignada', med.Ch_CargaA)
+    lista = [med.nombre, med.Ch_CargaA, 'Carga Asignada']
+    CheckTab.append(lista)
+    lista = [med.nombre, med.Ch_CargaT, 'Carga Teórica']
+    CheckTab.append(lista)
+    print(med.Ch_Night)
+print(Ch_T, Ch_A)
+
+for med in Medicos:
+    med.periodo = (Periodo - med.Conteo_Vacaciones)/ 30.4
+
+ForPandas8 = []
+for med in Medicos:
+    medListAlpha = [med.nombre, med.ingreso,med.Antiq, med.Cat,med.Conteo_Vacaciones, med.Ch_CargaT, med.Ch_CargaA, med.Ch_AM, med.Ch_PM, med.Ch_FridayPM,med.Ch_Night,
+                    med.Ch_WeekEnd,med.Ch_Sab,med.Ch_Dom,med.Ch_AM/med.periodo,
+                    med.Ch_PM/med.periodo,
+                    med.Ch_FridayPM/med.periodo,med.Ch_Night/med.periodo,med.Ch_WeekEnd/med.periodo]
+    ForPandas8.append(medListAlpha)
+Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias de vacaciones', 'Carga Teorica', 'Carga Asignada', 'Mañanas','Tardes','Viernes Tarde','Noches',
+             'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
+             'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
+MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
+Export2 = MedDF6.to_excel('AAA - Revision Asignacion con ajuste Manual (version Vacaciones 2024).xlsx', index=None, header=True)
 
 # %%
 for med in Medicos:
@@ -1251,7 +1435,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-#Export2 = MedDF6.to_excel('AAA - Revision Asignacion Real.xlsx', index=None, header=True)
+Export2 = MedDF6.to_excel('Revision de Check Turnos (Vacaciones 2024).xlsx', index=None, header=True)
 # %%
 print('Conflictos:')
 for con in Conflictos:
