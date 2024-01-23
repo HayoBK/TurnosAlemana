@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 fecha_inicio = datetime.date(2024, 8, 1)
 fecha_final = datetime.date(2025, 1, 1)
 meses=4 # meses a evaluar y asignar
-Nombre_Periodo = 'Abril-Julio 2024'
+Nombre_Periodo = 'Agosto-Diciembre 2024'
 diferencia = fecha_final - fecha_inicio
 mitad = diferencia / 2
 fecha_de_medida = fecha_inicio + mitad
@@ -41,7 +41,7 @@ WeekEnd = 6.3  # Valor un sabado o un domingo     5.5.
 
 # --------------- AJUSTES x VACACIONES ----------------------
 
-Night = 2
+Night = 9
 # --------------- -------------------- ----------------------
 
 print('Calculando...')
