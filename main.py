@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2023_Noviembre para programación de turnos Vacaciones Ene-Marzo 2024
+# Versión 2024_Febrero para programación de turnos Vacaciones Marzo-Diciembre 2024
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -57,7 +57,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 3  # meses a evaluar y asignar
+meses = 9  # meses a evaluar y asignar
 
 
 class UnDia:
@@ -73,6 +73,37 @@ class UnDia:
         F.append(datetime.date(2024, 3, 29))
         F.append(datetime.date(2024, 3, 30))
         F.append(datetime.date(2024, 3, 31))
+        F.append(datetime.date(2024, 5, 1))
+        F.append(datetime.date(2024, 5, 21))
+        F.append(datetime.date(2024, 6, 20))
+        F.append(datetime.date(2024, 7, 16))
+        F.append(datetime.date(2024, 8, 15))
+        F.append(datetime.date(2024, 9, 18))
+        F.append(datetime.date(2024, 9, 19))
+        F.append(datetime.date(2024, 5, 20))
+        F.append(datetime.date(2024, 5, 21))
+        F.append(datetime.date(2024, 5, 22))
+        F.append(datetime.date(2024, 10, 31))
+        F.append(datetime.date(2024, 11, 1))
+        F.append(datetime.date(2024, 11, 2))
+        F.append(datetime.date(2024, 11, 3))
+        F.append(datetime.date(2024, 12, 25))
+        F.append(datetime.date(2025, 1, 1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         # ------------------------------------------------
 
         self.Feriado = 0
@@ -115,8 +146,8 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generación
 # de turnoS
-fecha_inicio = datetime.date(2024, 1, 1)
-fecha_final = datetime.date(2024, 4, 1)
+fecha_inicio = datetime.date(2024, 4, 1)
+fecha_final = datetime.date(2025, 1, 1)
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -253,17 +284,12 @@ Medicos.append(Medico(13, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
 Medicos[13].Vacas(2024,1,8,2024,2,4)
 Medicos.append(Medico(14, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
 Medicos[14].Vacas(2024,1,15,2024,1,28)
+Medicos.append(Medico(15, 'Recluta1',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[15].Vacas(2024,4,1,2024,4,15)
 
 Max_Medicos_id = 14
 check2 = 0
 check3 = 0
-
-
-
-
-
-
-
 
 
 Dias_de_Semana_Asignados = 0
