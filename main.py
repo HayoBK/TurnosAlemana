@@ -2,7 +2,7 @@
 # Versión 2024_Febrero para programación de turnos Vacaciones Marzo-Diciembre 2024
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
-# En linea 178 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
+# En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
 #   en la mitad del periodo que estamos evaluando.
 
 # ---------------------------------------------------------------------------------
@@ -19,6 +19,15 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
+fecha_inicio = datetime.date(2024, 4, 1)
+fecha_final = datetime.date(2024, 7, 31)
+meses=4 # meses a evaluar y asignar
+Nombre_Periodo = 'Abril-Julio 2024'
+diferencia = fecha_final - fecha_inicio
+mitad = diferencia / 2
+fecha_de_medida = fecha_inicio + mitad
+
+
 COVID_Val_DS = 1  # Valor dia de semana
 COVID_Val_FD = 1.5  # Valor fin de semana y feriado
 
@@ -57,7 +66,7 @@ C_PM = 0
 C_FridayPM = 0
 C_Night = 0
 C_WeekEnd = 0
-meses = 9  # meses a evaluar y asignar
+#meses = 9  # meses a evaluar y asignar
 
 
 class UnDia:
@@ -146,8 +155,8 @@ class UnDia:
 # %%
 # Fijar fechas de inicio y final de la generación
 # de turnoS
-fecha_inicio = datetime.date(2024, 4, 1)
-fecha_final = datetime.date(2025, 1, 1)
+#fecha_inicio = datetime.date(2024, 4, 1)
+#fecha_final = datetime.date(2025, 1, 1)
 delta3 = fecha_final-fecha_inicio
 Periodo = delta3.days
 rfecha = fecha_inicio
@@ -221,6 +230,7 @@ class Medico:
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
         self.Medida = datetime.date(2024, 8, 1)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = fecha_de_medida
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -1091,7 +1101,8 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Año Abril-Diciembre 2024).xlsx', index=None, header=True)
+    nombrecito = 'AA - Calendario de Turnos(version ' + Nombre_Periodo + ').xlsx'
+    Export3 = MedDF.to_excel(nombrecito, index=None, header=True)
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
@@ -1205,7 +1216,8 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (version Año Abril-Diciembre 2024).xlsx', index=None, header=True)
+nombrecito = 'AAA - Revision Asignacion de Salida (version ' + Nombre_Periodo +').xlsx'
+Export2 = MedDF6.to_excel(nombrecito, index=None, header=True)
 
 # %%
 ForPandasCal = []
@@ -1221,11 +1233,12 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Vacaciones2024).xlsx', index=None, header=True)
+    nombrecito = 'AA - Calendario de Turnos(version '+ Nombre_Periodo +').xlsx'
+    Export3 = MedDF.to_excel(nombrecito, index=None, header=True)
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
-    MedDF = pd.read_excel('AAA - Calendario con ajuste Manual (version Vacaciones 2024).xlsx')
+    MedDF = pd.read_excel('AAA - Calendario con ajuste Manual.xlsx')
     for med in Medicos:
         med.Ch_AM = 0
         med.Ch_PM = 0
@@ -1335,7 +1348,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('AAA - Revision Asignacion con ajuste Manual (version Vacaciones 2024).xlsx', index=None, header=True)
+Export2 = MedDF6.to_excel('AAA - Revision Asignacion con ajuste Manual.xlsx', index=None, header=True)
 
 # %%
 for med in Medicos:
@@ -1460,7 +1473,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('Revision de Check Turnos (Vacaciones 2024).xlsx', index=None, header=True)
+Export2 = MedDF6.to_excel('Revision de Check Turnos.xlsx', index=None, header=True)
 # %%
 print('Conflictos:')
 for con in Conflictos:
