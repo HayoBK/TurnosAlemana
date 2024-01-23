@@ -220,7 +220,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2024, 2, 14)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = datetime.date(2025, 8, 1)  # Aqui se fija el dia en el que se mide antiguedad
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
         self.CargaAntiq2021 = self.Antiq * m + n  # -self.Antiq*0.0075+0.1212
@@ -251,41 +251,40 @@ class Medico:
 
 Medicos = []
 
-Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
-Medicos[0].Vacas(2024,2,1,2100,2,20)
-Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[1].Vacas(2024,1,20,2024,2,20)
-Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[2].Vacas(2024,3,1,2024,3,31)
-Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[3].Vacas(2024,1,3,2024,1,28)
-Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[4].Vacas(2024,1,1,2024,1,7)
-Medicos[4].Vacas(2024,2,5,2024,2,25)
-Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
-Medicos[5].Vacas(2024,2,1,2024,2,29) # 5 de marzo
-Medicos.append(Medico(6, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
-Medicos[6].Vacas(2024,1,3,2024,1,28)
-Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
-Medicos[7].Vacas(2024,1,29,2024,2,26)
-Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
-Medicos[8].Vacas(2024,2,1,2024,2,29) # 31 de marzo
-Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
-Medicos[9].Vacas(2024,1,15,2024,1,28)
-Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos[10].Vacas(2024,1,20,2024,2,19)
-Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-Medicos[11].Vacas(2024,2,19,2024,3,17)
+
+Medicos.append(Medico(0, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos[0].Vacas(2024,1,20,2024,2,20)
+Medicos.append(Medico(1, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos[1].Vacas(2024,3,1,2024,3,31)
+Medicos.append(Medico(2, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos[2].Vacas(2024,1,3,2024,1,28)
+Medicos.append(Medico(3, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos[3].Vacas(2024,1,1,2024,1,7)
+Medicos[3].Vacas(2024,2,5,2024,2,25)
+Medicos.append(Medico(4, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[4].Vacas(2024,2,1,2024,2,29) # 5 de marzo
+Medicos.append(Medico(5, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[5].Vacas(2024,1,3,2024,1,28)
+Medicos.append(Medico(6, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
+Medicos[6].Vacas(2024,1,29,2024,2,26)
+Medicos.append(Medico(7, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
+Medicos[7].Vacas(2024,2,1,2024,2,29) # 31 de marzo
+Medicos.append(Medico(8, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
+Medicos[8].Vacas(2024,1,15,2024,1,28)
+Medicos.append(Medico(9, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
+Medicos[9].Vacas(2024,1,20,2024,2,19)
+Medicos.append(Medico(10, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
+Medicos[10].Vacas(2024,2,19,2024,3,17)
 #Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
 #Medicos[12].Vacas(2024,1,14,2025,1,1)
-Medicos.append(Medico(12, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos[12].Vacas(2024,1,27,2024,2,24)
-Medicos.append(Medico(13, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[13].Vacas(2024,1,8,2024,2,4)
-Medicos.append(Medico(14, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[14].Vacas(2024,1,15,2024,1,28)
-Medicos.append(Medico(15, 'Recluta1',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[15].Vacas(2024,4,1,2024,4,15)
+Medicos.append(Medico(11, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos[11].Vacas(2024,1,27,2024,2,24)
+Medicos.append(Medico(12, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[12].Vacas(2024,1,8,2024,2,4)
+Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos[13].Vacas(2024,1,15,2024,1,28)
+Medicos.append(Medico(14, 'Recluta1',2024,4,1,'Padawan-Sin Fijo'))
+Medicos[14].Vacas(2024,4,1,2024,4,15)
 
 Max_Medicos_id = 14
 check2 = 0
