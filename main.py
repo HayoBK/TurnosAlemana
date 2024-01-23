@@ -261,6 +261,12 @@ class Medico:
 
 Medicos = []
 
+# Por si acaso las categorias son:
+#'Yoda-Sin Noches'
+#'Master-Mañanas'
+#'Knight-Tardes'
+#'Padawan-Sin Fijo'
+#'AUSENTE'
 
 Medicos.append(Medico(0, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
 Medicos[0].Vacas(2024,1,20,2024,2,20)
