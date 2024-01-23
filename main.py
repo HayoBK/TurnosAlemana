@@ -1092,7 +1092,7 @@ for D in Dia:
     ForPandasCal.append([D.fecha.year, D.fecha.month, D.fecha.day, D.wDay, D.N_AM, D.N_PM, D.N_Night,D.conflict,deVacaciones])
     Columnas3 = ['Año', 'Mes', 'Dia', 'Tipo de Dia', 'Mañana', 'Tarde', 'Noche','Conflictos a Revisar','De Vacaciones']
     MedDF = pd.DataFrame(ForPandasCal, columns=Columnas3)
-    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Vacaciones2024).xlsx', index=None, header=True)
+    Export3 = MedDF.to_excel('AA - Calendario de Turnos(version Año Abril-Diciembre 2024).xlsx', index=None, header=True)
     #           I
     #           I   Bloquea la proxima linea para bloquear la revisión Manual.
     #           V
@@ -1206,7 +1206,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
              'Fines de Semana','Sábados','Domingos','Mañanas/mes','Tardes/mes',
              'ViernesTarde/mes','Noches/mes','FindeSemana/mes']
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
-Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (version Vacaciones 2024).xlsx', index=None, header=True)
+Export2 = MedDF6.to_excel('AAA - Revision Asignacion de Salida (version Año Abril-Diciembre 2024).xlsx', index=None, header=True)
 
 # %%
 ForPandasCal = []
