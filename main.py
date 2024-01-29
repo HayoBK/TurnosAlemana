@@ -19,10 +19,10 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
-fecha_inicio = datetime.date(2024, 4, 1)
-fecha_final = datetime.date(2024, 7, 31)
+fecha_inicio = datetime.date(2024, 8, 1)
+fecha_final = datetime.date(2025, 1, 11)
 meses=4 # meses a evaluar y asignar
-Nombre_Periodo = 'Abril-Julio 2024'
+Nombre_Periodo = 'Agosto-Diciembre 2024'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -282,11 +282,11 @@ Medicos[3].Vacas(2024,1,1,2024,1,7)
 Medicos[3].Vacas(2024,2,5,2024,2,25)
 Medicos[3].Vacas(2024,8,20,2024,9,25)
 
-Medicos.append(Medico(4, 'Arredondo', 2014, 8, 1, 'Master-Mañanas'))
+Medicos.append(Medico(4, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
 Medicos[4].Vacas(2024,2,1,2024,2,29) # 5 de marzo
-Medicos.append(Medico(5, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
+Medicos.append(Medico(5, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Noches'))
 Medicos[5].Vacas(2024,1,3,2024,1,28)
-Medicos.append(Medico(6, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
+Medicos.append(Medico(6, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
 Medicos[6].Vacas(2024,1,29,2024,2,26)
 Medicos.append(Medico(7, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
 Medicos[7].Vacas(2024,2,1,2024,2,29) # 31 de marzo
