@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 # %%
 fecha_inicio = datetime.date(2024, 8, 1)
-fecha_final = datetime.date(2025, 1, 11)
+fecha_final = datetime.date(2025, 1, 1)
 meses=4 # meses a evaluar y asignar
 Nombre_Periodo = 'Agosto-Diciembre 2024'
 hoy = datetime.date.today()
