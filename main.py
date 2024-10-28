@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2024_Febrero para programación de turnos Vacaciones Marzo-Diciembre 2024
+# Versión 2024_Octibre para programación de turnos Vacaciones Enero Mayo 2025
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -19,10 +19,10 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
-fecha_inicio = datetime.date(2024, 8, 1)
-fecha_final = datetime.date(2025, 1, 1)
-meses=4 # meses a evaluar y asignar
-Nombre_Periodo = 'Agosto-Diciembre 2024'
+fecha_inicio = datetime.date(2025, 1, 2)
+fecha_final = datetime.date(2025, 6, 1)
+meses=5 # meses a evaluar y asignar
+Nombre_Periodo = 'Enero Mayo 2025'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -100,6 +100,14 @@ class UnDia:
         F.append(datetime.date(2024, 11, 3))
         F.append(datetime.date(2024, 12, 25))
         F.append(datetime.date(2025, 1, 1))
+        F.append(datetime.date(2025, 4, 18))
+        F.append(datetime.date(2025, 5, 1))
+        F.append(datetime.date(2025, 5, 2))
+        F.append(datetime.date(2025, 5, 21))
+
+
+
+
 
 
 
@@ -272,40 +280,48 @@ Medicos = []
 #'AUSENTE'
 
 Medicos.append(Medico(0, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[0].Vacas(2024,1,20,2024,2,20)
+Medicos[0].Vacas(2025,2,1,2025,2,28)
 Medicos.append(Medico(1, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[1].Vacas(2024,3,1,2024,3,31)
+Medicos[1].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(2, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[2].Vacas(2024,1,3,2024,1,28)
+Medicos[2].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(3, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[3].Vacas(2024,1,1,2024,1,7)
-Medicos[3].Vacas(2024,2,5,2024,2,25)
-Medicos[3].Vacas(2024,8,20,2024,9,25)
+Medicos[3].Vacas(2025,2,1,2025,2,28)
 
 Medicos.append(Medico(4, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[4].Vacas(2024,2,1,2024,2,29) # 5 de marzo
+Medicos[4].Vacas(2025,2,1,2025,2,28)
 Medicos.append(Medico(5, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[5].Vacas(2024,1,3,2024,1,28)
+Medicos[5].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(6, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[6].Vacas(2024,1,29,2024,2,26)
+Medicos[6].Vacas(2025,2,1,2025,2,28)
 Medicos.append(Medico(7, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
-Medicos[7].Vacas(2024,2,1,2024,2,29) # 31 de marzo
+Medicos[7].Vacas(2025,2,1,2025,2,28)
 Medicos.append(Medico(8, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
-Medicos[8].Vacas(2024,1,15,2024,1,28)
+Medicos[8].Vacas(2025,2,1,2025,2,28)
 Medicos.append(Medico(9, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos[9].Vacas(2024,1,20,2024,2,19)
+Medicos[9].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(10, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-Medicos[10].Vacas(2024,2,19,2024,3,17)
+Medicos[10].Vacas(2025,2,1,2025,2,28)
 #Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
 #Medicos[12].Vacas(2024,1,14,2025,1,1)
 Medicos.append(Medico(11, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos[11].Vacas(2024,1,27,2024,2,24)
+Medicos[11].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(12, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[12].Vacas(2024,1,8,2024,2,4)
+Medicos[12].Vacas(2025,1,2,2025,1,31)
 Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[13].Vacas(2024,1,15,2024,1,28)
-Medicos.append(Medico(14, 'Recluta1',2024,4,1,'Padawan-Sin Fijo'))
-Medicos[14].Vacas(2024,4,1,2024,4,15)
+Medicos[13].Vacas(2025,2,1,2025,2,28)
+Medicos.append(Medico(14, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
+Medicos[14].Vacas(2025,1,2,2025,1,31)
+Medicos.append(Medico(15, 'Winter',2024,4,1,'Padawan-Sin Fijo'))
+Medicos[15].Vacas(2025,1,2,2025,1,31)
+Medicos.append(Medico(16, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
+Medicos[16].Vacas(2025,1,2,2025,1,31)
+Medicos.append(Medico(17, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
+Medicos[17].Vacas(2025,2,1,2025,2,28)
+
+
+
+
 
 Max_Medicos_id = 14
 check2 = 0
@@ -389,59 +405,58 @@ for dia in Dia:
             dia.wDay = 'Sábado'
         elif dia.fecha.isoweekday() == 7:
             dia.wDay = 'Domingo'
-        #Ajustes extraños por cambios significativos en mitad de periodo
-        Limite1 = datetime.date(2024,2,1)
-        Limite2 = datetime.date(2024,3,1)
-        if dia.fecha < Limite2:
+        # Instrucción de cobertura Mañas/Tardes para el Verano por G.Pio
+        LimiteA = datetime.date(2025, 1, 1)
+        LimiteB = datetime.date(2025, 1, 31)
+        if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
             if dia.fecha.isoweekday() == 1:
                 NombreAM = 'Gomez'
-                NombrePM = 'Carrasco'
+                NombrePM = 'Cisternas'
                 dia.wDay = 'Lunes'
             elif dia.fecha.isoweekday() == 2:
-                NombreAM = 'Iñiguez'
+                NombreAM = 'Breinbauer'
                 NombrePM = 'Contreras'
                 dia.wDay = 'Martes'
             elif dia.fecha.isoweekday() == 3:
                 NombreAM = 'Arredondo'
-                NombrePM = 'Cisternas'
+                NombrePM = 'Arredondo'
                 dia.wDay = 'Miércoles'
             elif dia.fecha.isoweekday() == 4:
-                NombreAM = 'Bravo'
+                NombreAM = 'Gomez'
                 NombrePM = 'Culaciati'
                 dia.wDay = 'Jueves'
             elif dia.fecha.isoweekday() == 5:
                 NombreAM = 'Breinbauer'
                 dia.wDay = 'Viernes'
-            elif dia.fecha.isoweekday() == 6:
-                dia.wDay = 'Sábado'
-            elif dia.fecha.isoweekday() == 7:
-                dia.wDay = 'Domingo'
 
-        if dia.fecha < Limite1:
+        LimiteA = datetime.date(2025, 2, 1)
+        LimiteB = datetime.date(2025, 2, 28)
+        if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
             if dia.fecha.isoweekday() == 1:
-                NombreAM = 'Gomez'
-                NombrePM = 'Carrasco'
+                NombreAM = 'Bravo'
+                NombrePM = 'Cisternas'
                 dia.wDay = 'Lunes'
             elif dia.fecha.isoweekday() == 2:
                 NombreAM = 'Iñiguez'
                 NombrePM = 'Contreras'
                 dia.wDay = 'Martes'
             elif dia.fecha.isoweekday() == 3:
-                NombreAM = 'Fernandez'
-                NombrePM = 'Arredondo'
+                NombreAM = 'Carrasco'
+                NombrePM = 'Carrasco'
                 dia.wDay = 'Miércoles'
             elif dia.fecha.isoweekday() == 4:
                 NombreAM = 'Bravo'
                 NombrePM = 'Culaciati'
                 dia.wDay = 'Jueves'
             elif dia.fecha.isoweekday() == 5:
-                NombreAM = 'Breinbauer'
+                NombreAM = 'Iñiguez'
                 dia.wDay = 'Viernes'
             elif dia.fecha.isoweekday() == 6:
                 dia.wDay = 'Sábado'
             elif dia.fecha.isoweekday() == 7:
                 dia.wDay = 'Domingo'
 
+                #Ajustes extraños por cambios significativos en mitad de periodor
 
         if dia.fecha.isoweekday() < 6:
             for med in Medicos:
