@@ -4,7 +4,6 @@
 # En linea 60 --> añadir lista de Feriados
 # En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
 #   en la mitad del periodo que estamos evaluando.
-
 # ---------------------------------------------------------------------------------
 
 # %%
