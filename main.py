@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2024_Octibre para programación de turnos Vacaciones Enero Mayo 2025
+# Versión 2024_Diciembre para programación de turnos Vacaciones Marzo Mayo 2025
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -18,10 +18,10 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
-fecha_inicio = datetime.date(2025, 1, 2)
+fecha_inicio = datetime.date(2025, 3, 1)
 fecha_final = datetime.date(2025, 6, 1)
 meses=5 # meses a evaluar y asignar
-Nombre_Periodo = 'Enero Mayo 2025'
+Nombre_Periodo = 'Marzo Mayo 2025'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
