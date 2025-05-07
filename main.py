@@ -21,10 +21,10 @@ import matplotlib.pyplot as plt
 #   AQUI LO IMPORTANTE A ACTUALIZAR
 #----------------------------------------
 
-ultimate_meses = 9
+ultimate_meses = 7
 #Actualiza lista de feriados cerca de linea 80
-fecha_inicio = datetime.date(2023, 4, 1)
-fecha_final = datetime.date(2024, 1, 1)
+fecha_inicio = datetime.date(2025, 6, 1)
+fecha_final = datetime.date(2026, 1, 1)
 MEDIDA_ANTIGUEDAD = fecha_inicio + (fecha_final - fecha_inicio)/2
 
 
@@ -83,43 +83,23 @@ class UnDia:
         self.conflict = " - "
         # Aquí añadir lista de feriados y días especiales.
         F = []
-        F.append(datetime.date(2023, 1, 1))
-        F.append(datetime.date(2023, 1, 2))
-        F.append(datetime.date(2023, 4, 7))
-        F.append(datetime.date(2023, 4, 8))
-        F.append(datetime.date(2023, 4, 29))
-        F.append(datetime.date(2023, 4, 30))
-        F.append(datetime.date(2023, 5, 1))
-        F.append(datetime.date(2023, 6, 21))
-        F.append(datetime.date(2023, 6, 24))
-        F.append(datetime.date(2023, 6, 25))
-        F.append(datetime.date(2023, 6, 26))
+        F.append(datetime.date(2025, 6, 20))
+        F.append(datetime.date(2025, 7, 16))
+        F.append(datetime.date(2025, 8, 15))
+        F.append(datetime.date(2025, 9, 18))
+        F.append(datetime.date(2025, 9, 19))
+        F.append(datetime.date(2025, 10, 31))
+        F.append(datetime.date(2025, 12, 8))
+        F.append(datetime.date(2025, 12, 25))
+        F.append(datetime.date(2026, 1, 1))
 
-        F.append(datetime.date(2023, 8, 15))
-        F.append(datetime.date(2023, 9, 16))
-        F.append(datetime.date(2023, 9, 17))
-        F.append(datetime.date(2023, 9, 18))
-        F.append(datetime.date(2023, 9, 19))
 
-        F.append(datetime.date(2023, 10, 7))
-        F.append(datetime.date(2023, 10, 8))
-        F.append(datetime.date(2023, 10, 9))
-        F.append(datetime.date(2023, 10, 27))
-        F.append(datetime.date(2023, 10, 28))
-        F.append(datetime.date(2023, 10, 29))
 
-        F.append(datetime.date(2023, 11, 1))
-        F.append(datetime.date(2023, 12, 8))
-        F.append(datetime.date(2023, 12, 9))
-        F.append(datetime.date(2023, 12, 10))
 
-        F.append(datetime.date(2023, 12, 23))
-        F.append(datetime.date(2023, 12, 24))
-        F.append(datetime.date(2023, 12, 25))
 
-        F.append(datetime.date(2023, 12, 30))
-        F.append(datetime.date(2023, 12, 31))
-        F.append(datetime.date(2024, 1, 1))
+
+
+
 
 
 
@@ -272,22 +252,21 @@ class Medico:
             V1=V1 + timedelta(days=1)
 
 Medicos = []
-Medicos.append(Medico(0, 'Fernandez', 2012, 2, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(1, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(2, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(3, 'Iñiguez', 2014, 1, 1, 'Master-Mañanas'))
-Medicos.append(Medico(4, 'Breinbauer', 2014, 1, 1, 'Master-Mañanas'))
-Medicos.append(Medico(5, 'Arredondo', 2014, 8, 1, 'Knight-Tardes'))
-Medicos.append(Medico(6, 'Carrasco', 2014, 8, 1, 'Knight-Tardes'))
-Medicos.append(Medico(7, 'Culaciati', 2014, 8, 1, 'Knight-Tardes'))
-Medicos.append(Medico(8, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
-Medicos.append(Medico(9, 'Cisternas', 2017, 11, 1, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(10, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(11, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-Medicos.append(Medico(12, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(13, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(14, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(15, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+
+Medicos.append(Medico(0, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(1, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(2, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(3, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(4, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Nochess'))
+Medicos.append(Medico(5, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(6, 'Contreras', 2017, 1, 1, 'Master-Mañanas'))
+Medicos.append(Medico(7, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
+Medicos.append(Medico(8, 'Pio', 2018, 1, 13, 'Knight-Tardes'))
+Medicos.append(Medico(9, 'Alvo', 2019, 11, 1, 'Knight-Tardes'))
+Medicos.append(Medico(10, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(11, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(12, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
