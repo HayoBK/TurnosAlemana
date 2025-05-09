@@ -84,11 +84,21 @@ class UnDia:
         # Aquí añadir lista de feriados y días especiales.
         F = []
         F.append(datetime.date(2025, 6, 20))
+        F.append(datetime.date(2025, 6, 21))
+        F.append(datetime.date(2025, 6, 22))
         F.append(datetime.date(2025, 7, 16))
         F.append(datetime.date(2025, 8, 15))
+        F.append(datetime.date(2025, 8, 16))
+        F.append(datetime.date(2025, 8, 17))
         F.append(datetime.date(2025, 9, 18))
         F.append(datetime.date(2025, 9, 19))
+        F.append(datetime.date(2025, 9, 20))
+        F.append(datetime.date(2025, 9, 21))
         F.append(datetime.date(2025, 10, 31))
+        F.append(datetime.date(2025, 11, 1))
+        F.append(datetime.date(2025, 11, 2))
+        F.append(datetime.date(2025, 12, 6))
+        F.append(datetime.date(2025, 12, 7))
         F.append(datetime.date(2025, 12, 8))
         F.append(datetime.date(2025, 12, 25))
         F.append(datetime.date(2026, 1, 1))
@@ -191,7 +201,7 @@ Carga12 = C12_AM * AM + C12_PM * PM + C12_FridayPM * FridayPM + C12_Night * Nigh
 
 m = (Carga12 - CargaZERO) / delta
 n = delta - m * Carga12
-m = -0.25  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
+m = -0.65  # ESTE VALOR "APLANA la curva de distribución" ... estos fueron los M y N arbitrarios que luego de mucho
           # ensayo y error logré definir.
 
 n = 16.75
@@ -253,26 +263,33 @@ class Medico:
 
 Medicos = []
 
-Medicos.append(Medico(0, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(1, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(2, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(3, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(4, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Nochess'))
-Medicos.append(Medico(5, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos.append(Medico(6, 'Contreras', 2017, 1, 1, 'Master-Mañanas'))
-Medicos.append(Medico(7, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
-Medicos.append(Medico(8, 'Pio', 2018, 1, 13, 'Knight-Tardes'))
-Medicos.append(Medico(9, 'Alvo', 2019, 11, 1, 'Knight-Tardes'))
-Medicos.append(Medico(10, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(11, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(12, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(0, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(1, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(2, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(3, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Nochess'))
+Medicos.append(Medico(4, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(5, 'Contreras', 2017, 1, 1, 'Master-Mañanas'))
+Medicos.append(Medico(6, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
+Medicos.append(Medico(7, 'Pio', 2018, 1, 1, 'Knight-Tardes'))
+Medicos.append(Medico(8, 'Alvo', 2019, 11, 1, 'Knight-Tardes'))
+#Medicos.append(Medico(9, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(9, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(10, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(11, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(12, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(13, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(14, 'Winter',2024,11,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(15, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
+
+
 Max_Medicos_id = 15
 check2 = 0
 check3 = 0
 
 #Periodo Marzo- Diciembre 2023
 #Daniela Contreras
+
+""" 
 Medicos[8].Vacas(2023,3,6,2023,4,2) #
 
 
@@ -310,7 +327,7 @@ Medicos[15].Vacas(2023,1,14,2023,1,29)
 Medicos[9].Vacas(2023,2,5,2023,2,19)
 #Bravo
 Medicos[2].Vacas(2023,1,20,2023,2,17)
-
+"""
 
 
 
@@ -375,19 +392,19 @@ for dia in Dia:
     # print(dia.fecha,' es un ',dia.tipodia)
     if dia.Feriado == 0:
         if dia.fecha.isoweekday() == 1:
-            NombreAM = 'Gomez'
-            NombrePM = 'Carrasco'
+            NombreAM = 'Contreras'
+            NombrePM = 'Alvo'
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
             NombreAM = 'Iñiguez'
-            NombrePM = 'Contreras'
+            NombrePM = 'Pio'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
-            NombreAM = 'Fernandez'
-            NombrePM = 'Arredondo'
+            NombreAM = 'Arredondo'
+            NombrePM = 'Cisternas'
             dia.wDay = 'Miércoles'
         elif dia.fecha.isoweekday() == 4:
-            NombreAM = 'Bravo'
+            NombreAM = 'Carrasco'
             NombrePM = 'Culaciati'
             dia.wDay = 'Jueves'
         elif dia.fecha.isoweekday() == 5:
@@ -625,12 +642,13 @@ C_Night = Check
 
 while Check != 0:
     for med in reversed(Medicos):
-        if Check > 0:
-            med.A_Night += 1
-            Check -= 1
-        if Check < 0:
-            med.A_Night -= 1
-            Check += 1
+        if med.Cat != 'Yoda-Sin Noches':
+            if Check > 0:
+                med.A_Night += 1
+                Check -= 1
+            if Check < 0:
+                med.A_Night -= 1
+                Check += 1
 
 print('Turno de Noche sin asingar -error - : ', Check)
 C_Night = Check
@@ -994,7 +1012,7 @@ for D in Dia:
 # ORDENAR LISTA DE Noches
 TuList = []
 for med in Medicos:
-    if med.A_Night > 0:
+    if (med.A_Night > 0):
         med.TCount = med.A_Night
         med.Fq = (Count_Night / med.TCount)
         med.Pri = med.Fq / 2
