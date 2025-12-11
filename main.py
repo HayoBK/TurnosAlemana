@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2024_Diciembre para programación de turnos Vacaciones Marzo Mayo 2025
+# Versión 2025_Diciembre para programación de turnos Enero Julio 2026
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -18,10 +18,10 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
-fecha_inicio = datetime.date(2025, 3, 1)
-fecha_final = datetime.date(2025, 6, 1)
+fecha_inicio = datetime.date(2026, 1, 2)
+fecha_final = datetime.date(2026, 7, 31)
 meses=5 # meses a evaluar y asignar
-Nombre_Periodo = 'Marzo Mayo 2025'
+Nombre_Periodo = 'Enero Julio 2026'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -103,6 +103,22 @@ class UnDia:
         F.append(datetime.date(2025, 5, 1))
         F.append(datetime.date(2025, 5, 2))
         F.append(datetime.date(2025, 5, 21))
+
+        F.append(datetime.date(2026, 1, 1))  # Año Nuevo
+        F.append(datetime.date(2026, 3, 29))  # Viernes Santo
+        F.append(datetime.date(2026, 3, 30))  # Sábado Santo
+        F.append(datetime.date(2026, 5, 1))  # Día del Trabajo
+        F.append(datetime.date(2026, 5, 21))  # Glorias Navales
+        F.append(datetime.date(2026, 6, 29))  # San Pedro y San Pablo
+        F.append(datetime.date(2026, 7, 16))  # Virgen del Carmen
+        F.append(datetime.date(2026, 8, 15))  # Asunción
+        F.append(datetime.date(2026, 9, 18))  # Independencia (irrenunciable)
+        F.append(datetime.date(2026, 9, 19))  # Glorias del Ejército (irrenunciable)
+        F.append(datetime.date(2026, 10, 12))  # Encuentro de Dos Mundos
+        F.append(datetime.date(2026, 10, 31))  # Iglesias Evangélicas
+        F.append(datetime.date(2026, 11, 1))  # Todos los Santos
+        F.append(datetime.date(2026, 12, 8))  # Inmaculada Concepción
+        F.append(datetime.date(2026, 12, 25))  # Navidad (irrenunciable)
 
 
 
