@@ -444,6 +444,7 @@ for dia in Dia:
         LimiteA = datetime.date(2026, 3, 1)
         LimiteB = datetime.date(2026, 8, 1)
         if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
+            if dia.fecha.isoweekday() == 3:
                 NombrePM = 'Rubio'
         #Ajustes extraños por cambios significativos en mitad de periodor
 
