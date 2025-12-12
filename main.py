@@ -446,6 +446,7 @@ for dia in Dia:
         if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
             if dia.fecha.isoweekday() == 3:
                 NombrePM = 'Rubio'
+
         #Ajustes extraños por cambios significativos en mitad de periodor
 
         if dia.fecha.isoweekday() < 6:
