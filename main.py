@@ -79,60 +79,47 @@ class UnDia:
         self.conflict = " - "
         # Aquí añadir lista de feriados y días especiales.
         F = []
-        F.append(datetime.date(2024, 1, 1))
-        F.append(datetime.date(2024, 3, 29))
-        F.append(datetime.date(2024, 3, 30))
-        F.append(datetime.date(2024, 3, 31))
-        F.append(datetime.date(2024, 5, 1))
-        F.append(datetime.date(2024, 5, 21))
-        F.append(datetime.date(2024, 6, 20))
-        F.append(datetime.date(2024, 7, 16))
-        F.append(datetime.date(2024, 8, 15))
-        F.append(datetime.date(2024, 9, 18))
-        F.append(datetime.date(2024, 9, 19))
-        F.append(datetime.date(2024, 5, 20))
-        F.append(datetime.date(2024, 5, 21))
-        F.append(datetime.date(2024, 5, 22))
-        F.append(datetime.date(2024, 10, 31))
-        F.append(datetime.date(2024, 11, 1))
-        F.append(datetime.date(2024, 11, 2))
-        F.append(datetime.date(2024, 11, 3))
-        F.append(datetime.date(2024, 12, 25))
-        F.append(datetime.date(2025, 1, 1))
-        F.append(datetime.date(2025, 4, 18))
-        F.append(datetime.date(2025, 5, 1))
-        F.append(datetime.date(2025, 5, 2))
-        F.append(datetime.date(2025, 5, 21))
 
         F.append(datetime.date(2026, 1, 1))  # Año Nuevo
-        F.append(datetime.date(2026, 3, 29))  # Viernes Santo
-        F.append(datetime.date(2026, 3, 30))  # Sábado Santo
-        F.append(datetime.date(2026, 5, 1))  # Día del Trabajo
-        F.append(datetime.date(2026, 5, 21))  # Glorias Navales
-        F.append(datetime.date(2026, 6, 29))  # San Pedro y San Pablo
-        F.append(datetime.date(2026, 7, 16))  # Virgen del Carmen
-        F.append(datetime.date(2026, 8, 15))  # Asunción
-        F.append(datetime.date(2026, 9, 18))  # Independencia (irrenunciable)
-        F.append(datetime.date(2026, 9, 19))  # Glorias del Ejército (irrenunciable)
-        F.append(datetime.date(2026, 10, 12))  # Encuentro de Dos Mundos
-        F.append(datetime.date(2026, 10, 31))  # Iglesias Evangélicas
-        F.append(datetime.date(2026, 11, 1))  # Todos los Santos
-        F.append(datetime.date(2026, 12, 8))  # Inmaculada Concepción
-        F.append(datetime.date(2026, 12, 25))  # Navidad (irrenunciable)
+        F.append(datetime.date(2026, 4, 3))  # Viernes Santo
+        F.append(datetime.date(2026, 4, 4))  # Sabado Santo
+        F.append(datetime.date(2026, 4, 5))  # Domingo Santo
+
+        F.append(datetime.date(2026, 5, 1))  # Viernes Día del Trabajo
+        F.append(datetime.date(2026, 5, 2))  # Sabado Día del Trabajo
+        F.append(datetime.date(2026, 5, 3))  # Domingo Día del Trabajo
+
+        F.append(datetime.date(2026, 5, 21))  # Jueves Glorias Navales
+        F.append(datetime.date(2026, 5, 22))  # Viernes Glorias Navales
+        F.append(datetime.date(2026, 5, 23))  # sabado Glorias Navales
+        F.append(datetime.date(2026, 5, 24))  # domingo Glorias Navales
+
+        F.append(datetime.date(2026, 6, 27))  # Sabado San Pedro y San Pablo
+        F.append(datetime.date(2026, 6, 28))  # domingo San Pedro y San Pablo
+        F.append(datetime.date(2026, 6, 29))  # Lunes San Pedro y San Pablo
+
+        F.append(datetime.date(2026, 7, 16))  # Jueves Virgen del Carmen
+        F.append(datetime.date(2026, 7, 17))  # Viernes Virgen del Carmen
+        F.append(datetime.date(2026, 7, 18))  # Sabado Virgen del Carmen
+        F.append(datetime.date(2026, 7, 19))  # Domingo Virgen del Carmen
+
+        F.append(datetime.date(2026, 9, 18))  # Viernes Independencia (irrenunciable)
+        F.append(datetime.date(2026, 9, 19))  # Sabado Glorias del Ejército (irrenunciable)
+        F.append(datetime.date(2026, 9, 20))  # Domingo Glorias del Ejército (irrenunciable)
+
+        F.append(datetime.date(2026, 10, 10))  # Sabado Encuentro de Dos Mundos
+        F.append(datetime.date(2026, 10, 11))  # Domingo Encuentro de Dos Mundos
+        F.append(datetime.date(2026, 10, 12))  # Lunes Encuentro de Dos Mundos
+
+        F.append(datetime.date(2026, 12, 5))  # Sabado Inmaculada Concepción
+        F.append(datetime.date(2026, 12, 6))  # Domingo Inmaculada Concepción
+        F.append(datetime.date(2026, 12, 7))  # Lunes Inmaculada Concepción
+        F.append(datetime.date(2026, 12, 8))  # Martes Inmaculada Concepción
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        F.append(datetime.date(2026, 12, 25))  # Viernes Navidad (irrenunciable)
+        F.append(datetime.date(2026, 12, 26))  # Sabado Navidad (irrenunciable)
+        F.append(datetime.date(2026, 12, 27))  # Domingo Navidad (irrenunciable)
 
 
 
@@ -294,51 +281,60 @@ Medicos = []
 #'Padawan-Sin Fijo'
 #'AUSENTE'
 
-Medicos.append(Medico(0, 'Gomez', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[0].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(1, 'Bravo', 2013, 7, 1, 'Yoda-Sin Noches'))
-Medicos[1].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(2, 'Iñiguez', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[2].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(3, 'Breinbauer', 2014, 1, 1, 'Yoda-Sin Noches'))
-Medicos[3].Vacas(2025,2,1,2025,2,28)
+K = 0
 
-Medicos.append(Medico(4, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[4].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(5, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[5].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(6, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[6].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(7, 'Contreras', 2017, 1, 1, 'Knight-Tardes'))
-Medicos[7].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(8, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
-Medicos[8].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(9, 'Pio', 2018, 1, 13, 'Padawan-Sin Fijo'))
-Medicos[9].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(10, 'Alvo', 2019, 11, 1, 'Padawan-Sin Fijo'))
-Medicos[10].Vacas(2025,2,1,2025,2,28)
-#Medicos.append(Medico(12, 'Ramos',2021,9,1,'AUSENTE'))
-#Medicos[12].Vacas(2024,1,14,2025,1,1)
-Medicos.append(Medico(11, 'Boettiger',2021,9,1,'Padawan-Sin Fijo'))
-Medicos[11].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(12, 'Loch',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[12].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(13, 'Rubio',2022,6,1,'Padawan-Sin Fijo'))
-Medicos[13].Vacas(2025,2,1,2025,2,28)
-Medicos.append(Medico(14, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
-Medicos[14].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(15, 'Winter',2024,4,1,'Padawan-Sin Fijo'))
-Medicos[15].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(16, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
-Medicos[16].Vacas(2025,1,2,2025,1,31)
-Medicos.append(Medico(17, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
-Medicos[17].Vacas(2025,2,1,2025,2,28)
+Medicos.append(Medico(K, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos[K].Vacas(2026,1,9,2026,2,8) # Enero
+K += 1
+Medicos.append(Medico(K, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Contreras', 2017, 1, 1, 'Master-Mañanas'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+Medicos[K].Vacas(2026,3,1,2026,8,1) # Cisternas no esta de marzo a Julio
+K += 1
+Medicos.append(Medico(K, 'Pio', 2018, 1, 13, 'Master-Mañanas'))
+Medicos[K].Vacas(2026,1,9,2026,2,8) # Enero
+K += 1
+Medicos.append(Medico(K, 'Alvo', 2019, 11, 1, 'Master-Mañanas'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(12, 'Ramos',2021,9,1,'Knight-Tardes'))
+Medicos[K].Vacas(2026,1,1,2026,2,28) # Phoebe llega en marzo
+K += 1
+Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Knight-Tardes'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Loch',2022,6,1,'Knight-Tardes'))
+Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
+K += 1
+Medicos.append(Medico(K, 'Rubio',2022,6,1,'Knight-Tardes'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
+K += 1
+Medicos.append(Medico(K, 'Winter',2024,4,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
+K += 1
+Medicos.append(Medico(K, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
+K += 1
+Medicos.append(Medico(K, 'Cabello',2025,12,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,1,19,2026,1,31) # Enero
 
-
-
-
-
-Max_Medicos_id = 14
+Max_Medicos_id = K
+K+=1
+print('ESTAMOS CONTANDO CON UNA DOTACION DE ',K,' Otorrinos activos haciendo turno')
 check2 = 0
 check3 = 0
 
@@ -398,29 +394,30 @@ for dia in Dia:
     # print(dia.fecha,' es un ',dia.tipodia)
     if dia.Feriado == 0:
         if dia.fecha.isoweekday() == 1:
-            NombreAM = 'Gomez'
-            NombrePM = 'Cisternas'
+            NombreAM = 'Contreras'
+            NombrePM = 'Loch'
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
-            NombreAM = 'Iñiguez'
-            NombrePM = 'Contreras'
+            NombreAM = 'Pio'
+            NombrePM = 'Boettiger'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
             NombreAM = 'Arredondo'
-            NombrePM = 'Carrasco'
+            NombrePM = 'Cisternas'
             dia.wDay = 'Miércoles'
         elif dia.fecha.isoweekday() == 4:
-            NombreAM = 'Bravo'
+            NombreAM = 'Carrasco'
             NombrePM = 'Culaciati'
             dia.wDay = 'Jueves'
         elif dia.fecha.isoweekday() == 5:
-            NombreAM = 'Breinbauer'
+            NombreAM = 'Alvo'
             dia.wDay = 'Viernes'
         elif dia.fecha.isoweekday() == 6:
             dia.wDay = 'Sábado'
         elif dia.fecha.isoweekday() == 7:
             dia.wDay = 'Domingo'
         # Instrucción de cobertura Mañas/Tardes para el Verano por G.Pio
+        """
         LimiteA = datetime.date(2025, 1, 1)
         LimiteB = datetime.date(2025, 1, 31)
         if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
@@ -443,35 +440,12 @@ for dia in Dia:
             elif dia.fecha.isoweekday() == 5:
                 NombreAM = 'Breinbauer'
                 dia.wDay = 'Viernes'
-
-        LimiteA = datetime.date(2025, 2, 1)
-        LimiteB = datetime.date(2025, 2, 28)
+        """
+        LimiteA = datetime.date(2026, 3, 1)
+        LimiteB = datetime.date(2026, 8, 1)
         if (dia.fecha >= LimiteA) and (dia.fecha <= LimiteB):
-            if dia.fecha.isoweekday() == 1:
-                NombreAM = 'Bravo'
-                NombrePM = 'Cisternas'
-                dia.wDay = 'Lunes'
-            elif dia.fecha.isoweekday() == 2:
-                NombreAM = 'Iñiguez'
-                NombrePM = 'Contreras'
-                dia.wDay = 'Martes'
-            elif dia.fecha.isoweekday() == 3:
-                NombreAM = 'Carrasco'
-                NombrePM = 'Carrasco'
-                dia.wDay = 'Miércoles'
-            elif dia.fecha.isoweekday() == 4:
-                NombreAM = 'Bravo'
-                NombrePM = 'Culaciati'
-                dia.wDay = 'Jueves'
-            elif dia.fecha.isoweekday() == 5:
-                NombreAM = 'Iñiguez'
-                dia.wDay = 'Viernes'
-            elif dia.fecha.isoweekday() == 6:
-                dia.wDay = 'Sábado'
-            elif dia.fecha.isoweekday() == 7:
-                dia.wDay = 'Domingo'
-
-                #Ajustes extraños por cambios significativos en mitad de periodor
+                NombrePM = 'Rubio'
+        #Ajustes extraños por cambios significativos en mitad de periodor
 
         if dia.fecha.isoweekday() < 6:
             for med in Medicos:
