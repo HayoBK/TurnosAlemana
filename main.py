@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 # %%
 fecha_inicio = datetime.date(2026, 1, 2)
 fecha_final = datetime.date(2026, 7, 31)
+fecha_calculo_antiguedad = datetime.date(2026, 4, 1)
 meses=5 # meses a evaluar y asignar
 Nombre_Periodo = 'Enero Julio 2026'
 hoy = datetime.date.today()
@@ -241,7 +242,7 @@ class Medico:
         self.nombre = nombre
         self.ingreso = datetime.date(año, mes, dia)
         self.Cat = Cat
-        self.Medida = datetime.date(2024, 8, 1)  # Aqui se fija el dia en el que se mide antiguedad
+        self.Medida = fecha_calculo_antiguedad  # Aqui se fija el dia en el que se mide antiguedad
         self.Medida = fecha_de_medida
         Dif = self.Medida - self.ingreso
         self.Antiq = Dif.days / 365
@@ -266,8 +267,8 @@ class Medico:
         V1=datetime.date(V1a,V1m,V1d)
         V2=datetime.date(V2a,V2m,V2d) + timedelta(days=1)
         delta1 = V2-V1
-        if ((fecha_inicio <= V1 <= fecha_final) and (fecha_inicio <= V2 <= fecha_final)):
-            self.Conteo_Vacaciones+=delta1.days
+        #if ((fecha_inicio <= V1 <= fecha_final) and (fecha_inicio <= V2 <= fecha_final)):
+        self.Conteo_Vacaciones+=delta1.days
         while V1 != V2:
             self.Vacaciones.append(V1)
             V1=V1 + timedelta(days=1)
@@ -305,7 +306,7 @@ K += 1
 Medicos.append(Medico(K, 'Alvo', 2019, 11, 1, 'Master-Mañanas'))
 Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
 K += 1
-Medicos.append(Medico(12, 'Ramos',2021,9,1,'Knight-Tardes'))
+Medicos.append(Medico(K, 'Ramos',2021,9,1,'Knight-Tardes'))
 Medicos[K].Vacas(2026,1,1,2026,2,28) # Phoebe llega en marzo
 K += 1
 Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Knight-Tardes'))
