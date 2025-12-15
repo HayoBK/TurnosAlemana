@@ -19,10 +19,10 @@ import matplotlib.pyplot as plt
 
 # %%
 fecha_inicio = datetime.date(2026, 1, 2)
-fecha_final = datetime.date(2026, 7, 31)
-fecha_calculo_antiguedad = datetime.date(2026, 4, 1)
+fecha_final = datetime.date(2026, 4, 5)
+fecha_calculo_antiguedad = datetime.date(2026, 2, 15)
 meses=5 # meses a evaluar y asignar
-Nombre_Periodo = 'Enero Julio 2026'
+Nombre_Periodo = 'Enero Marzo 2026'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -263,15 +263,33 @@ class Medico:
             total_FindeSemanaScore += self.LoadScore
 
         self.Vacaciones=[]
-    def Vacas(self,V1a,V1m,V1d,V2a,V2m,V2d):
-        V1=datetime.date(V1a,V1m,V1d)
-        V2=datetime.date(V2a,V2m,V2d) + timedelta(days=1)
-        delta1 = V2-V1
-        #if ((fecha_inicio <= V1 <= fecha_final) and (fecha_inicio <= V2 <= fecha_final)):
-        self.Conteo_Vacaciones+=delta1.days
-        while V1 != V2:
-            self.Vacaciones.append(V1)
-            V1=V1 + timedelta(days=1)
+
+    def Vacas(self, V1a, V1m, V1d, V2a, V2m, V2d):
+        # 1) construir fechas (si vienen inválidas, date() lanzará ValueError y es correcto)
+        vac_ini = datetime.date(V1a, V1m, V1d)
+        vac_fin = datetime.date(V2a, V2m, V2d)
+
+        # 2) normalizar por si vienen al revés
+        if vac_fin < vac_ini:
+            vac_ini, vac_fin = vac_fin, vac_ini
+
+        # 3) intersección con el periodo permitido
+        ini = max(vac_ini, fecha_inicio)
+        fin = min(vac_fin, fecha_final)
+
+        # si no se intersectan, no hacemos nada
+        if fin < ini:
+            return 0
+
+        # 4) contar días inclusivos (fin - ini + 1)
+        dias = (fin - ini).days + 1
+        self.Conteo_Vacaciones += dias
+
+        # 5) guardar cada día (también inclusivo)
+        d = ini
+        while d <= fin:
+            self.Vacaciones.append(d)
+            d += timedelta(days=1)
 
 Medicos = []
 
@@ -306,7 +324,7 @@ K += 1
 Medicos.append(Medico(K, 'Alvo', 2019, 11, 1, 'Master-Mañanas'))
 Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
 K += 1
-Medicos.append(Medico(K, 'Ramos',2021,9,1,'Knight-Tardes'))
+Medicos.append(Medico(K, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
 Medicos[K].Vacas(2026,1,1,2026,2,28) # Phoebe llega en marzo
 K += 1
 Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Knight-Tardes'))
@@ -321,7 +339,7 @@ K += 1
 Medicos.append(Medico(K, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
 Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
 K += 1
-Medicos.append(Medico(K, 'Winter',2024,4,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(K, 'Winter',2024,11,1,'Padawan-Sin Fijo'))
 Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
 K += 1
 Medicos.append(Medico(K, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
