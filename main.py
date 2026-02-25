@@ -18,6 +18,12 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 
 # %%
+
+# Todo lo que venga después de signo gato, como en esta linea, son comentarios que no se procesa
+# Pero sirven para ordenarse
+
+# Primer Segmento de definiciones: Que fechas vamos a procesar:
+
 fecha_inicio = datetime.date(2026, 1, 2)
 fecha_final = datetime.date(2026, 4, 5)
 fecha_calculo_antiguedad = datetime.date(2026, 2, 15)
@@ -80,7 +86,12 @@ class UnDia:
         self.conflict = " - "
         # Aquí añadir lista de feriados y días especiales.
         F = []
-
+        
+# Segundo Segmento de definiciones: Que fechas definimos como feriados (SON LAS FECHAS
+# QUE EL ALGORITMO DEJA SIN RELLENAR, FUERA DE LOS CALCULOS
+# Hay que poner los días intermedios de un feriado para un fin de semana largo
+# Yo le doy una muestra a Chat GPT y le pido que me arme la lista con los feriados del año a veces
+        
         F.append(datetime.date(2026, 1, 1))  # Año Nuevo
         F.append(datetime.date(2026, 4, 3))  # Viernes Santo
         F.append(datetime.date(2026, 4, 4))  # Sabado Santo
@@ -301,6 +312,14 @@ Medicos = []
 #'AUSENTE'
 
 K = 0
+
+# TECER SEGMENTO a definir, la lista de los médicos que hacen turnos
+# En la primera linea de cada definición viene la categoria: 'Yoda-Sin Noches', 'Master-Mañanas'
+# 'Knight-Tardes', 'Padawan-Sin Fijo' o 'AUSENTE'
+# Entre el apellido y la categoria esta la fecha de ingreso a los turnos
+# Luego se pueden agregar “Vacas” con el formato que te pongo abajo, que viene con primer y 
+# ultimo día de las vacaciones. Siempre el formato es año,mes,día. Cada persona puede tener más de un 
+# segmento de vacaciones. (fijate el ejemplo de Ariel)
 
 Medicos.append(Medico(K, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
 Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
