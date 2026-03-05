@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------
-# Versión 2025_Diciembre para programación de turnos Enero Julio 2026
+# Versión 2026_Marzo para programación de turnos Abril Julio 2026
 # Para nuevos calculos revisar linea 48... meses a evaluar!
 # En linea 60 --> añadir lista de Feriados
 # En linea 223 --> cambiar fecha en la que se mide la antiguedad de cada médico. he usado la fecha justo
@@ -24,11 +24,11 @@ import matplotlib.pyplot as plt
 
 # Primer Segmento de definiciones: Que fechas vamos a procesar:
 
-fecha_inicio = datetime.date(2026, 1, 2)
-fecha_final = datetime.date(2026, 4, 5)
-fecha_calculo_antiguedad = datetime.date(2026, 2, 15)
+fecha_inicio = datetime.date(2026, 4, 1)
+fecha_final = datetime.date(2026, 7, 31)
+fecha_calculo_antiguedad = datetime.date(2026, 5, 30)
 meses=5 # meses a evaluar y asignar
-Nombre_Periodo = 'Enero Marzo 2026'
+Nombre_Periodo = 'Abril Julio 2026'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -91,47 +91,32 @@ class UnDia:
 # QUE EL ALGORITMO DEJA SIN RELLENAR, FUERA DE LOS CALCULOS
 # Hay que poner los días intermedios de un feriado para un fin de semana largo
 # Yo le doy una muestra a Chat GPT y le pido que me arme la lista con los feriados del año a veces
-        
+
         F.append(datetime.date(2026, 1, 1))  # Año Nuevo
         F.append(datetime.date(2026, 4, 3))  # Viernes Santo
         F.append(datetime.date(2026, 4, 4))  # Sabado Santo
         F.append(datetime.date(2026, 4, 5))  # Domingo Santo
-
         F.append(datetime.date(2026, 5, 1))  # Viernes Día del Trabajo
         F.append(datetime.date(2026, 5, 2))  # Sabado Día del Trabajo
         F.append(datetime.date(2026, 5, 3))  # Domingo Día del Trabajo
-
         F.append(datetime.date(2026, 5, 21))  # Jueves Glorias Navales
-        F.append(datetime.date(2026, 5, 22))  # Viernes Glorias Navales
-        F.append(datetime.date(2026, 5, 23))  # sabado Glorias Navales
-        F.append(datetime.date(2026, 5, 24))  # domingo Glorias Navales
-
         F.append(datetime.date(2026, 6, 27))  # Sabado San Pedro y San Pablo
         F.append(datetime.date(2026, 6, 28))  # domingo San Pedro y San Pablo
         F.append(datetime.date(2026, 6, 29))  # Lunes San Pedro y San Pablo
-
         F.append(datetime.date(2026, 7, 16))  # Jueves Virgen del Carmen
-        F.append(datetime.date(2026, 7, 17))  # Viernes Virgen del Carmen
-        F.append(datetime.date(2026, 7, 18))  # Sabado Virgen del Carmen
-        F.append(datetime.date(2026, 7, 19))  # Domingo Virgen del Carmen
-
         F.append(datetime.date(2026, 9, 18))  # Viernes Independencia (irrenunciable)
         F.append(datetime.date(2026, 9, 19))  # Sabado Glorias del Ejército (irrenunciable)
         F.append(datetime.date(2026, 9, 20))  # Domingo Glorias del Ejército (irrenunciable)
-
         F.append(datetime.date(2026, 10, 10))  # Sabado Encuentro de Dos Mundos
         F.append(datetime.date(2026, 10, 11))  # Domingo Encuentro de Dos Mundos
         F.append(datetime.date(2026, 10, 12))  # Lunes Encuentro de Dos Mundos
-
-        F.append(datetime.date(2026, 12, 5))  # Sabado Inmaculada Concepción
-        F.append(datetime.date(2026, 12, 6))  # Domingo Inmaculada Concepción
-        F.append(datetime.date(2026, 12, 7))  # Lunes Inmaculada Concepción
         F.append(datetime.date(2026, 12, 8))  # Martes Inmaculada Concepción
-
-
+        F.append(datetime.date(2026, 12, 24))  # Jueves Navidad (noche buena)
         F.append(datetime.date(2026, 12, 25))  # Viernes Navidad (irrenunciable)
         F.append(datetime.date(2026, 12, 26))  # Sabado Navidad (irrenunciable)
         F.append(datetime.date(2026, 12, 27))  # Domingo Navidad (irrenunciable)
+
+        F.append(datetime.date(2026, 12, 31))  # Jueves Año nuevo (noche vieja)
 
 
 
@@ -321,54 +306,41 @@ K = 0
 # ultimo día de las vacaciones. Siempre el formato es año,mes,día. Cada persona puede tener más de un 
 # segmento de vacaciones. (fijate el ejemplo de Ariel)
 
-Medicos.append(Medico(K, 'Arredondo', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+Medicos.append(Medico(K, 'Arredondo', 2014,8,1, 'Yoda-Sin Noches'))
 K += 1
-Medicos.append(Medico(K, 'Carrasco', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[K].Vacas(2026,1,9,2026,2,8) # Enero
+Medicos.append(Medico(K, 'Carrasco', 2014,8,1, 'Yoda-Sin Noches'))
 K += 1
-Medicos.append(Medico(K, 'Culaciati', 2014, 8, 1, 'Yoda-Sin Noches'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+Medicos.append(Medico(K, 'Culaciati', 2014,8,1, 'Yoda-Sin Noches'))
 K += 1
-Medicos.append(Medico(K, 'Contreras', 2017, 1, 1, 'Master-Mañanas'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+Medicos.append(Medico(K, 'Contreras', 2017,1,1, 'Master-Mañanas'))
 K += 1
-Medicos.append(Medico(K, 'Cisternas', 2017, 11, 1, 'Knight-Tardes'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
-Medicos[K].Vacas(2026,3,1,2026,8,1) # Cisternas no esta de marzo a Julio
+#Medicos.append(Medico(K, 'Cisternas', 2017,11,1, 'AUSENTE'))
+#Medicos[K].Vacas(2026,3,1,2026,8,1) # Cisternas no esta de marzo a Julio
+#K += 1
+Medicos.append(Medico(K, 'Pio', 2018,1,1, 'Master-Mañanas'))
 K += 1
-Medicos.append(Medico(K, 'Pio', 2018, 1, 13, 'Master-Mañanas'))
-Medicos[K].Vacas(2026,1,9,2026,2,8) # Enero
-K += 1
-Medicos.append(Medico(K, 'Alvo', 2019, 11, 1, 'Master-Mañanas'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
-K += 1
-Medicos.append(Medico(K, 'Ramos',2021,9,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,1,1,2026,2,28) # Phoebe llega en marzo
+Medicos.append(Medico(K, 'Alvo', 2019,11,1, 'Master-Mañanas'))
 K += 1
 Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Knight-Tardes'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
 K += 1
 Medicos.append(Medico(K, 'Loch',2022,6,1,'Knight-Tardes'))
-Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
 K += 1
 Medicos.append(Medico(K, 'Rubio',2022,6,1,'Knight-Tardes'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
+K += 1
+Medicos.append(Medico(K, 'Ramos',2022,11,1, 'Padawan-Sin Fijo'))
 K += 1
 Medicos.append(Medico(K, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
 K += 1
 Medicos.append(Medico(K, 'Winter',2024,11,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
 K += 1
 Medicos.append(Medico(K, 'Abarca',2024,11,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,2,1,2026,2,28) # Febrero
 K += 1
 Medicos.append(Medico(K, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,1,1,2026,1,31) # Enero
+Medicos[K].Vacas(2026,5,15,2026,5,23) # Mayo
 K += 1
+
 Medicos.append(Medico(K, 'Cabello',2025,12,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,1,19,2026,1,31) # Enero
+
 
 Max_Medicos_id = K
 K+=1
@@ -1274,7 +1246,7 @@ Columnas2 = ['Medico', 'Fecha Ingreso a SUCA', 'Antiguedad', 'Categoria', 'Dias 
 MedDF6 = pd.DataFrame(ForPandas8, columns=Columnas2)
 nombrecito = 'AAA - Revision Asignacion de Salida (version ' + Nombre_Periodo +').xlsx'
 Export2 = MedDF6.to_excel(nombrecito, index=None, header=True)
-
+"""
 # %%
 ForPandasCal = []
 for D in Dia:
@@ -1535,3 +1507,7 @@ print('Conflictos:')
 for con in Conflictos:
     print(con)
 print('Listo')
+"""
+print('----------------------------------------------------------------------------')
+print('Todo listo. Version 2026.03.05 - Era Libre de Hayo y con Pauta a Giorgio')
+print('----------------------------------------------------------------------------')
