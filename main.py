@@ -340,6 +340,8 @@ Medicos[K].Vacas(2026,5,15,2026,5,23) # Mayo
 K += 1
 
 Medicos.append(Medico(K, 'Cabello',2025,12,1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,5,15,2026,5,23) # Mayo
+
 
 
 Max_Medicos_id = K
