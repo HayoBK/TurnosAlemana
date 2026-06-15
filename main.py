@@ -24,11 +24,11 @@ import matplotlib.pyplot as plt
 
 # Primer Segmento de definiciones: Que fechas vamos a procesar:
 
-fecha_inicio = datetime.date(2026, 4, 1)
-fecha_final = datetime.date(2026, 7, 31)
-fecha_calculo_antiguedad = datetime.date(2026, 5, 30)
+fecha_inicio = datetime.date(2026, 8, 1)
+fecha_final = datetime.date(2027, 1, 1)
+fecha_calculo_antiguedad = datetime.date(2026, 10, 1)
 meses=5 # meses a evaluar y asignar
-Nombre_Periodo = 'Abril Julio 2026'
+Nombre_Periodo = 'Agosto Diciembre 2026'
 hoy = datetime.date.today()
 hoy = str(hoy)
 Nombre_Periodo = Nombre_Periodo + '-caculado el ' + hoy
@@ -411,15 +411,15 @@ for dia in Dia:
             dia.wDay = 'Lunes'
         elif dia.fecha.isoweekday() == 2:
             NombreAM = 'Pio'
-            NombrePM = 'Boettiger'
+            NombrePM = 'Ramos'
             dia.wDay = 'Martes'
         elif dia.fecha.isoweekday() == 3:
-            NombreAM = 'Arredondo'
+            NombreAM = 'Boettiger'
             NombrePM = 'Cisternas'
             dia.wDay = 'Miércoles'
         elif dia.fecha.isoweekday() == 4:
-            NombreAM = 'Carrasco'
-            NombrePM = 'Culaciati'
+            NombreAM = 'Rubio'
+            NombrePM = 'Salazar'
             dia.wDay = 'Jueves'
         elif dia.fecha.isoweekday() == 5:
             NombreAM = 'Alvo'
