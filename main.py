@@ -306,30 +306,26 @@ K = 0
 # ultimo día de las vacaciones. Siempre el formato es año,mes,día. Cada persona puede tener más de un 
 # segmento de vacaciones. (fijate el ejemplo de Ariel)
 
-Medicos.append(Medico(K, 'Arredondo', 2014,8,1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(K, 'Contreras', 2017,1,1,'Master-Mañanas'))
+Medicos[K].Vacas(2026,9,14,2026,9,20) # Septiembre
 K += 1
-Medicos.append(Medico(K, 'Carrasco', 2014,8,1, 'Yoda-Sin Noches'))
+Medicos.append(Medico(K, 'Cisternas', 2017,11,1, 'Knight-Tardes'))
+Medicos[K].Vacas(2026,8,1,2026,8,31) # Agosto
 K += 1
-Medicos.append(Medico(K, 'Culaciati', 2014,8,1, 'Yoda-Sin Noches'))
-K += 1
-Medicos.append(Medico(K, 'Contreras', 2017,1,1, 'Master-Mañanas'))
-K += 1
-#Medicos.append(Medico(K, 'Cisternas', 2017,11,1, 'AUSENTE'))
-#Medicos[K].Vacas(2026,3,1,2026,8,1) # Cisternas no esta de marzo a Julio
-#K += 1
 Medicos.append(Medico(K, 'Pio', 2018,1,1, 'Master-Mañanas'))
 K += 1
 Medicos.append(Medico(K, 'Alvo', 2019,11,1, 'Master-Mañanas'))
 K += 1
-Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Knight-Tardes'))
+Medicos.append(Medico(K, 'Boettiger',2021,9,1,'Master-Mañanas'))
 K += 1
 Medicos.append(Medico(K, 'Loch',2022,6,1,'Knight-Tardes'))
 K += 1
-Medicos.append(Medico(K, 'Rubio',2022,6,1,'Knight-Tardes'))
+Medicos.append(Medico(K, 'Rubio',2022,6,1,'Master-Mañanas'))
 K += 1
-Medicos.append(Medico(K, 'Ramos',2022,11,1, 'Padawan-Sin Fijo'))
+Medicos.append(Medico(K, 'Ramos',2022,11,1, 'Knight-Tardes'))
 K += 1
-Medicos.append(Medico(K, 'Salazar',2024,4,1,'Padawan-Sin Fijo'))
+Medicos.append(Medico(K, 'Salazar',2024,4,1,'Knight-Tardes'))
+Medicos[K].Vacas(2026,10,1,2026,11,30) # Fellow
 K += 1
 Medicos.append(Medico(K, 'Winter',2024,11,1,'Padawan-Sin Fijo'))
 K += 1
@@ -338,9 +334,12 @@ K += 1
 Medicos.append(Medico(K, 'Gajardo',2024,11,1,'Padawan-Sin Fijo'))
 Medicos[K].Vacas(2026,5,15,2026,5,23) # Mayo
 K += 1
-
 Medicos.append(Medico(K, 'Cabello',2025,12,1,'Padawan-Sin Fijo'))
-Medicos[K].Vacas(2026,5,15,2026,5,23) # Mayo
+K += 1
+Medicos.append(Medico(K, 'Ricci',2026, 9, 1,'Padawan-Sin Fijo'))
+Medicos[K].Vacas(2026,8,1,2026,8,31) # Agosto
+K += 1
+
 
 
 
